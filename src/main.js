@@ -33,7 +33,7 @@ cityInput.addEventListener('submit', getCity);
 cityInput.addEventListener('change', displayMatches);
 cityInput.addEventListener('keyup', displayMatches);
 
-function fetchCurrent(query) {
+function fetchByCity(query) {
     // current weather
     let currentWeather = fetch(`http://api.openweathermap.org/data/2.5/weather?${searchMethod}=${query}&units=${units}&APPID=${appId}`)
     .then((response) => {
@@ -44,9 +44,6 @@ function fetchCurrent(query) {
     })
     .then(response => console.log(response.weather[0].description))
     .catch(error => console.log('Not found'))
-}
-
-function fetchForecast(query) {
     // 5-day forecast
     let forecast = fetch(`http://api.openweathermap.org/data/2.5/forecast?${searchMethod}=${query}&units=${units}&APPID=${appId}`)
     .then((response) => {
@@ -60,6 +57,7 @@ function fetchForecast(query) {
 }
 
 function fetchByCoordinates(lat, lon) {
+    //current weather
     fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=${units}&APPID=${appId}`)
     .then((response) => {
             if (!response.ok) {
@@ -69,6 +67,16 @@ function fetchByCoordinates(lat, lon) {
         })
         .then(response => console.log(response))
         .catch(err => console.log('Not found'))
+    // 5-day forecast
+    fetch(`http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=${units}&APPID=${appId}`)
+        .then((response) => {
+            if (!response.ok) {
+                throw new Error();
+            }
+            return response.json();
+        })
+        .then(response => console.log(response))
+        .catch(error => console.log('Not found'))
 }
 
 function getCity(e) {
@@ -87,8 +95,7 @@ function getCity(e) {
     }
 
     if(city){
-        fetchCurrent(city);
-        fetchForecast(city);
+        fetchByCity(city);
     }
 }
 
