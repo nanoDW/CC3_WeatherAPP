@@ -10,21 +10,28 @@ cityInput.addEventListener('submit', getCity);
 function fetchCurrent(query) {
     // current weather
     let currentWeather = fetch(`http://api.openweathermap.org/data/2.5/weather?${searchMethod}=${query}&units=${units}&APPID=${appId}`)
-    .then(result => result.json())
-    .then(result => console.log(result.weather[0].description));
-    return currentWeather;
+    .then((response) => {
+        if (!response.ok) {
+           throw new Error();
+        }
+        return response.json();
+    })
+    .then(response => console.log(response.weather[0].description))
+    .catch(error => console.log('Invalid query'))
 }
 
 function fetchForecast(query) {
     // 5-day forecast
     let forecast = fetch(`http://api.openweathermap.org/data/2.5/forecast?${searchMethod}=${query}&units=${units}&APPID=${appId}`)
-    .then(result => result.json())
-    .then(result => console.log(result));
-    return forecast;
+    .then((response) => {
+        if (!response.ok) {
+            throw new Error();
+        }
+        return response.json();
+    })
+    .then(response => console.log(response))
+    .catch(err => console.log('Invalid query'))
 }
-
-fetchCurrent('Wrocław');
-fetchForecast('Wrocław');
 
 function getCity(e) {
     e.preventDefault();
@@ -41,9 +48,9 @@ function getCity(e) {
         city = '';
     } else if (city[0].match(/[0-9]/)) {
         if (city.length === 5) {
-            city = `Postal: ${city.slice(0, 2)}-${city.slice(2, 5)}`;
+            city;
         } else if (city.length === 6 && city[2] === '-') {
-            city = 'Postal: ' + city;
+            city;
         } else {
             console.log('Invalid Postal code');
             city = '';
