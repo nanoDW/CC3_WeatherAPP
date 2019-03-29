@@ -2,6 +2,20 @@ const appId = '0ae6c1ab2f3771bcf82ab2f9738ba430';
 let units = 'metric'; // jeśli chcemy wyświetlać tez w Fahrenheitach
 let searchMethod = 'q';    // jeśli chcemy umozliwić wyszukiwanie po czymś innym niz nazwa miasta
 
+// Geolocation
+// Jak ktoś zaakceptuje
+function geoSuccess(position) {
+   lat = position.coords.latitude;
+   lon = position.coords.longitude;
+   fetchByCoordinates(lat,lon);
+}
+// Jak ktoś odmówi - w takim przypadku chyba nic nie robimy i czekamy na input?
+function geoDenied() {
+    console.log('Geolocation denied');
+}
+navigator.geolocation.getCurrentPosition(geoSuccess, geoDenied);
+
+
 const cityInput = document.getElementById('cityInput');
 const suggestions = document.querySelector('.suggestions');
 
@@ -43,6 +57,18 @@ function fetchForecast(query) {
     })
     .then(response => console.log(response))
     .catch(err => console.log('Not found'))
+}
+
+function fetchByCoordinates(lat, lon) {
+    fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=${units}&APPID=${appId}`)
+    .then((response) => {
+            if (!response.ok) {
+                throw new Error();
+            }
+            return response.json();
+        })
+        .then(response => console.log(response))
+        .catch(err => console.log('Not found'))
 }
 
 function getCity(e) {
