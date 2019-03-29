@@ -2,10 +2,22 @@ const appId = '0ae6c1ab2f3771bcf82ab2f9738ba430';
 let units = 'metric'; // jeśli chcemy wyświetlać tez w Fahrenheitach
 let searchMethod = 'q';    // jeśli chcemy umozliwić wyszukiwanie po czymś innym niz nazwa miasta
 
-let cityInput = document.getElementById('cityInput');
+const cityInput = document.getElementById('cityInput');
+const suggestions = document.querySelector('.suggestions');
+
 let city = '';
 
+const data = './data/cities.json';
+const cities = [];
+
+//fetch file with names of cities for suggestions
+fetch(data)
+    .then(blob => blob.json())
+    .then(data => cities.push(...data))
+
 cityInput.addEventListener('submit', getCity);
+cityInput.addEventListener('change', displayMatches);
+cityInput.addEventListener('keyup', displayMatches);
 
 function fetchCurrent(query) {
     // current weather
@@ -51,5 +63,31 @@ function getCity(e) {
     if(city){
         fetchCurrent(city);
         fetchForecast(city);
+    }
+}
+
+//zrzynka z wes bosa
+function findMatches(wordToMatch, cities) {
+    return cities.filter(place => {
+        const regexToMatch = new RegExp(wordToMatch, 'gi');
+        return place.n.match(regexToMatch);
+    })
+}
+
+function displayMatches() {
+    const cityName = this[0].value;
+
+    if (cityName.length >= 3) {
+        const matchArray = findMatches(cityName, cities);
+        const html = matchArray.map(place => {
+            if (place.n.toLowerCase().search(cityName) === 0) {
+                return `<li><span class="name"> ${place.n}, ${place.c}</span></li>`;
+            }
+        }).join('');
+
+        suggestions.innerHTML = html;
+        
+    } else {
+        suggestions.innerHTML = '';
     }
 }
