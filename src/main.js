@@ -17,7 +17,7 @@ function fetchCurrent(query) {
         return response.json();
     })
     .then(response => console.log(response.weather[0].description))
-    .catch(error => console.log('Invalid query'))
+    .catch(error => console.log('Not found'))
 }
 
 function fetchForecast(query) {
@@ -30,7 +30,7 @@ function fetchForecast(query) {
         return response.json();
     })
     .then(response => console.log(response))
-    .catch(err => console.log('Invalid query'))
+    .catch(err => console.log('Not found'))
 }
 
 function getCity(e) {
