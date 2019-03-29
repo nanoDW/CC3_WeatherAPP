@@ -37,27 +37,15 @@ function getCity(e) {
     e.preventDefault();
 
     //list of special chars that we dont want in our string
-    const regex = /[!$%^&*()_+|~=`{}\[\]:\/;<>?,.@#]/;
+    const regex = /(--)|[!$%^&*()_+|~=`{}\[\]:\/;<>?,.@#]/;
 
     city = e.target[0].value.toLowerCase().trim();
 
     if (!city) {
         console.log('FormField is empty');
     } else if (city.match(regex) || city.match(/[0-9]/) && city.match(/[a-z]/)) {
-        console.log('Invalid input')
+        console.log('Input contains invalid characters')
         city = '';
-    } else if (city[0].match(/[0-9]/)) {
-        if (city.length === 5) {
-            city;
-        } else if (city.length === 6 && city[2] === '-') {
-            city;
-        } else {
-            console.log('Invalid Postal code');
-            city = '';
-        }
-        if (city) console.log(city);
-    } else {
-        console.log(city);
     }
 
     if(city){
