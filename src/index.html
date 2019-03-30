@@ -7,11 +7,123 @@
     <title>Best Weather App Ever</title>
 </head>
 <body>
+    <!-- Initial Page-->
+    <section class = "initial">
+        <i class="initial__icon initial__icon--big"></i>
+        <p class = "initial__location">your location:</p>
+        <input class="initial__cityinput" placeholder="City"></input>
+        <button class="initial__button">Submit</button>
+        <i class="initial__icon initial__icon--small"></i>
+    </section>
+
+    <!-- Main Page-->
+    <section class="main">
+
+        <!-- Header-->
+        <header class = "main__header">
+            <div class="header__city">
+                <div class="city__name"></div>
+                <i class="city__icon"></i>
+            </div>
+            <div class="header__date"></div>
+        </header>
+
+        <!-- Weather Today Basic Info-->
+        <div class = "main__basic">
+            <p class= "basic__description"></p>
+            <i class= "basic__icon--big"></i>
+            <div class= "basic__temperature"></div>
+        </div>
+
+        <!-- Weather Today Details-->
+        <div class = "main__details">
+            <ul class="details">
+                <li class="details__item">
+                    <i class="details__icon"></i>
+                    <div class= "details__description"></div>
+                </li>
+                <li class="details__item">
+                    <i class="details__icon"></i>
+                    <div class="details__description"></div>
+                </li>
+                <li class="details__item">
+                    <i class="details__icon"></i>
+                    <div class="details__description"></div>
+                </li>
+                <li class="details__item">
+                    <i class="details__icon"></i>
+                    <div class="details__description"></div>
+                </li>
+                <li class="details__item">
+                    <i class="details__icon"></i>
+                    <div class="details__description"></div>
+                </li>
+                <li class="details__item">
+                    <i class="details__icon"></i>
+                    <div class="details__description"></div>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Aside-->
+        <aside class = "main__aside">
+
+            <!-- Settings -->
+            <div class = "aside__settings">
+                <i class = "settings__icon"></i>
+                <ul class = "settings">
+                     <li class="settings__item">Change location</li>
+                     <li class="settings__item">Favorites</li>
+                     <li class="settings__item">Charts</li>
+                     <li class="settings__item">Settings</li>
+                </ul>
+            </div>
+
+            <!-- Five day weather -->
+            <div class = "aside_five">
+                <ul class = "five">
+                    <li class = "five__item">
+                        <i class = "five__icon"></i>
+                        <div class = "five__data"></div>
+                        <div class = "five__temperature"></div>
+                    </li>
+                    <li class="five__item">
+                        <i class="five__icon"></i>
+                        <div class="five__data"></div>
+                        <div class="five__temperature"></div>
+                    </li>
+                    <li class="five__item">
+                        <i class="five__icon"></i>
+                        <div class="five__data"></div>
+                        <div class="five__temperature"></div>
+                    </li>
+                    <li class="five__item">
+                        <i class="five__icon"></i>
+                        <div class="five__data"></div>
+                        <div class="five__temperature"></div>
+                    </li>
+                    <li class="five__item">
+                        <i class="five__icon"></i>
+                        <div class="five__data"></div>
+                        <div class="five__temperature"></div>
+                    </li>
+                </ul>
+            </div>
+        </aside>
+    </section>
+
+
+
+
     <form id="cityInput">
         <input type="text" placeholder="City">
         <ul class="suggestions"></ul>
         <input type="submit" value="Submit">
     </form>
+
+    <!-- JS -->
     <script src="main.js"></script>
+
+
 </body>
 </html>
