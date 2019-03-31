@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Best Weather App Ever</title>
 </head>
+
 <body>
     <!-- Initial Page-->
-    <section class = "initial">
+    <section class="initial" hidden>
         <i class="initial__icon initial__icon--big"></i>
-        <p class = "initial__location">your location:</p>
+        <p class="initial__location">your location:</p>
         <input class="initial__cityinput" placeholder="City"></input>
         <button class="initial__button">Submit</button>
         <i class="initial__icon initial__icon--small"></i>
@@ -20,7 +22,7 @@
     <section class="main">
 
         <!-- Header-->
-        <header class = "main__header">
+        <header class="main__header">
             <div class="header__city">
                 <div class="city__name"></div>
                 <i class="city__icon"></i>
@@ -29,18 +31,18 @@
         </header>
 
         <!-- Weather Today Basic Info-->
-        <div class = "main__basic">
-            <p class= "basic__description"></p>
-            <i class= "basic__icon--big"></i>
-            <div class= "basic__temperature"></div>
+        <div class="main__basic">
+            <p class="basic__description"></p>
+            <i class="basic__icon--big"></i>
+            <div class="basic__temperature"></div>
         </div>
 
         <!-- Weather Today Details-->
-        <div class = "main__details">
+        <div class="main__details">
             <ul class="details">
                 <li class="details__item">
                     <i class="details__icon"></i>
-                    <div class= "details__description"></div>
+                    <div class="details__description"></div>
                 </li>
                 <li class="details__item">
                     <i class="details__icon"></i>
@@ -66,26 +68,26 @@
         </div>
 
         <!-- Aside-->
-        <aside class = "main__aside">
+        <aside class="main__aside">
 
             <!-- Settings -->
-            <div class = "aside__settings">
-                <i class = "settings__icon"></i>
-                <ul class = "settings">
-                     <li class="settings__item">Change location</li>
-                     <li class="settings__item">Favorites</li>
-                     <li class="settings__item">Charts</li>
-                     <li class="settings__item">Settings</li>
+            <div class="aside__settings">
+                <i class="settings__icon"></i>
+                <ul class="settings">
+                    <li class="settings__item">Change location</li>
+                    <li class="settings__item">Favorites</li>
+                    <li class="settings__item">Charts</li>
+                    <li class="settings__item">Settings</li>
                 </ul>
             </div>
 
             <!-- Five day weather -->
-            <div class = "aside_five">
-                <ul class = "five">
-                    <li class = "five__item">
-                        <i class = "five__icon"></i>
-                        <div class = "five__data"></div>
-                        <div class = "five__temperature"></div>
+            <div class="aside_five">
+                <ul class="five">
+                    <li class="five__item">
+                        <i class="five__icon"></i>
+                        <div class="five__data"></div>
+                        <div class="five__temperature"></div>
                     </li>
                     <li class="five__item">
                         <i class="five__icon"></i>
@@ -114,7 +116,7 @@
 
 
 
-    <!-- form o wrzucenia w opowiednie miejsce w htmlu-->
+    <!-- form do wrzucenia w opowiednie miejsce w htmlu-->
     <form id="cityInput">
         <input type="text" placeholder="City">
         <ul class="suggestions"></ul>
@@ -126,4 +128,5 @@
 
 
 </body>
+
 </html>
