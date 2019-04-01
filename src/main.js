@@ -103,7 +103,7 @@ function getCity(e) {
 function findMatches(wordToMatch, cities) {
     return cities.filter(place => {
         const regexToMatch = new RegExp(wordToMatch, 'gi');
-        return place.n.match(regexToMatch);
+        return place.c.match(regexToMatch);
     })
 }
 
@@ -113,8 +113,8 @@ function displayMatches() {
     if (cityName.length >= 3) {
         const matchArray = findMatches(cityName, cities);
         const html = matchArray.map(place => {
-            if (place.n.toLowerCase().search(cityName) === 0) {
-                return `<li><span class="name"> ${place.n}, ${place.c}</span></li>`;
+            if (place.c.toLowerCase().search(cityName) === 0) {
+                return `<li><span class="name">${place.c}</span></li>`;
             }
         }).join('');
 
