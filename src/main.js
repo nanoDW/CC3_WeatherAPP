@@ -49,8 +49,22 @@ function findDates(forecast) {
     let day3 = filteredForecast.slice(16, 24);
     let day4 = filteredForecast.slice(24, 32);
 
-    days = [day1, day2, day3, day4]
-    minMaxTemp(days);
+    days = [day1, day2, day3, day4];
+    constructDays(days);
+}
+
+function constructDays(days) {
+    minMax = minMaxTemp(days);
+    maxTemps = minMax[0];
+    minTemps = minMax[1];
+
+    let day1 = new Day(days[0], maxTemps[0], minTemps[0]);
+    let day2 = new Day(days[1], maxTemps[1], minTemps[1]);
+    let day3 = new Day(days[2], maxTemps[2], minTemps[2]);
+    let day4 = new Day(days[3], maxTemps[3], minTemps[3]);
+
+    console.log(day1, day2, day3, day4)
+    return [day1, day2, day3, day4];
 }
 
 // finding the min and max temperature for each day
@@ -67,26 +81,37 @@ function minMaxTemp(days) {
         maxTemps[i] = Math.max(...dailyMaxTemp);
         minTemps[i] = Math.min(...dailyMinTemp)
     }
-    console.log(maxTemps);
-    console.log(minTemps);
+    return [maxTemps, minTemps];
+}
+
+
+class Day {
+    constructor(day, maxTemp, minTemp) {
+        this.date = day[4].dt_txt;
+        this.id = day[4].weather[0].id,
+        this.main = day[4].weather[0].main;
+        this.description = day[4].weather[0].description;
+        this.maxTemp = maxTemp;
+        this.minTemp = minTemp;
+    }
 }
 
 // FINDING THE RIGHT DATA FOR THE CURRENT WEATHER
 
 class Today {
     constructor(currentWeather) {
-        this.currClouds = currentWeather.clouds.all,
-        this.currHumidity = currentWeather.main.humidity,
-        this.currPressure = currentWeather.main.pressure,
-        this.currTemp = currentWeather.main.temp,
-        this.currTempMax = currentWeather.main.temp_max,
-        this.currTempMin = currentWeather.main.temp_min,
-        this.currSunrise = currentWeather.sys.sunrise,
-        this.currSunset = currentWeather.sys.sunset,
+        this.Clouds = currentWeather.clouds.all,
+        this.Humidity = currentWeather.main.humidity,
+        this.Pressure = currentWeather.main.pressure,
+        this.Temp = currentWeather.main.temp,
+        this.TempMax = currentWeather.main.temp_max,
+        this.TempMin = currentWeather.main.temp_min,
+        this.Sunrise = currentWeather.sys.sunrise,
+        this.Sunset = currentWeather.sys.sunset,
         this.currDescription = currentWeather.weather[0].description,
-        this.currId = currentWeather.weather[0].id,
-        this.currMain = currentWeather.weather[0].main,
-        this.currWind = currentWeather.wind.speed
+        this.Id = currentWeather.weather[0].id,
+        this.Main = currentWeather.weather[0].main,
+        this.Wind = currentWeather.wind.speed
     }
 }
 
