@@ -33,51 +33,118 @@ cityInput.addEventListener('submit', getCity);
 cityInput.addEventListener('change', displayMatches);
 cityInput.addEventListener('keyup', displayMatches);
 
-function fetchByCity(query) {
-    // current weather
-    let currentWeather = fetch(`http://api.openweathermap.org/data/2.5/weather?${searchMethod}=${query}&units=${units}&APPID=${appId}`)
-    .then((response) => {
-        if (!response.ok) {
-           throw new Error();
-        }
-        return response.json();
+
+// FINDING THE RIGHT DATA FOR THE FORECAST
+
+function findDates(forecast) {
+    // filtering out the wather for today
+    // filteredForecast is a new array with weather for tomorrow and the next days
+    let now = new Date();
+    now = now.toDateString();
+    let filteredForecast = forecast.list.filter(function (el) {
+        return new Date(el.dt_txt).toDateString() !== now;
     })
-    .then(response => console.log(response.weather[0].description))
-    .catch(error => console.log('Not found'))
-    // 5-day forecast
-    let forecast = fetch(`http://api.openweathermap.org/data/2.5/forecast?${searchMethod}=${query}&units=${units}&APPID=${appId}`)
-    .then((response) => {
-        if (!response.ok) {
-            throw new Error();
-        }
-        return response.json();
-    })
-    .then(response => console.log(response))
-    .catch(err => console.log('Not found'))
+    let day1 = filteredForecast.slice(0, 8);
+    let day2 = filteredForecast.slice(8, 16);
+    let day3 = filteredForecast.slice(16, 24);
+    let day4 = filteredForecast.slice(24, 32);
+
+    days = [day1, day2, day3, day4]
+    minMaxTemp(days);
 }
 
-function fetchByCoordinates(lat, lon) {
-    //current weather
-    fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=${units}&APPID=${appId}`)
-    .then((response) => {
-            if (!response.ok) {
-                throw new Error();
-            }
-            return response.json();
+// finding the min and max temperature for each day
+function minMaxTemp(days) {
+    let maxTemps = [];
+    let minTemps = [];
+    for (let i = 0; i < 4; i++) {
+        let dailyMaxTemp = [];
+        let dailyMinTemp = [];
+        days[i].forEach(el => {
+            dailyMaxTemp.push(el.main.temp_max);
+            dailyMinTemp.push(el.main.temp_min);
         })
-        .then(response => console.log(response))
-        .catch(err => console.log('Not found'))
-    // 5-day forecast
-    fetch(`http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=${units}&APPID=${appId}`)
-        .then((response) => {
-            if (!response.ok) {
-                throw new Error();
-            }
-            return response.json();
-        })
-        .then(response => console.log(response))
-        .catch(error => console.log('Not found'))
+        maxTemps[i] = Math.max(...dailyMaxTemp);
+        minTemps[i] = Math.min(...dailyMinTemp)
+    }
+    console.log(maxTemps);
+    console.log(minTemps);
 }
+
+// FINDING THE RIGHT DATA FOR THE CURRENT WEATHER
+
+class Today {
+    constructor(currentWeather) {
+        this.currClouds = currentWeather.clouds.all,
+        this.currHumidity = currentWeather.main.humidity,
+        this.currPressure = currentWeather.main.pressure,
+        this.currTemp = currentWeather.main.temp,
+        this.currTempMax = currentWeather.main.temp_max,
+        this.currTempMin = currentWeather.main.temp_min,
+        this.currSunrise = currentWeather.sys.sunrise,
+        this.currSunset = currentWeather.sys.sunset,
+        this.currDescription = currentWeather.weather[0].description,
+        this.currId = currentWeather.weather[0].id,
+        this.currMain = currentWeather.weather[0].main,
+        this.currWind = currentWeather.wind.speed
+    }
+}
+
+// THE END OF FINDING DATA :)
+
+// FETCHING
+async function fetchByCity(query) {
+    try {
+        // read current weather
+        let weatherResponse = await fetch(`http://api.openweathermap.org/data/2.5/weather?${searchMethod}=${query}&units=${units}&APPID=${appId}`);
+        if (!weatherResponse.ok) {
+            throw new Error();
+        }
+        let currentWeather = await (weatherResponse.json());
+        let today = new Today(currentWeather);
+        console.log(today);
+
+        // read forecast
+        let forecastResponse = await fetch(`http://api.openweathermap.org/data/2.5/forecast?${searchMethod}=${query}&units=${units}&APPID=${appId}`);
+        if (!forecastResponse.ok) {
+            throw new Error();
+        }
+        let forecast = await forecastResponse.json();
+        findDates(forecast);
+        
+    }
+    catch(err) {
+        console.log(err.message);
+    }
+    
+}
+
+async function fetchByCoordinates(lat, lon) {
+    try {
+        // read current weather
+        let weatherResponse = await fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=${units}&APPID=${appId}`)
+        if (!weatherResponse.ok) {
+            throw new Error();
+        }
+        let currentWeather = await (weatherResponse.json());
+        let today = new Today(currentWeather);
+        console.log(today);
+
+        // read forecast
+        let forecastResponse = await fetch(`http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=${units}&APPID=${appId}`)
+        if (!forecastResponse.ok) {
+            throw new Error();
+        }
+        let forecast = await forecastResponse.json();
+        findDates(forecast);
+
+        }
+        catch (err) {
+            console.log(err.message);
+        }     
+}
+
+// THE END OF FETCHING
 
 function getCity(e) {
     e.preventDefault();
