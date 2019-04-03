@@ -100,6 +100,7 @@ class Day {
 
 class Today {
     constructor(currentWeather) {
+        this.city = currentWeather.name,
         this.Clouds = currentWeather.clouds.all,
         this.Humidity = currentWeather.main.humidity,
         this.Pressure = currentWeather.main.pressure,
@@ -152,6 +153,7 @@ async function fetchByCoordinates(lat, lon) {
             throw new Error();
         }
         let currentWeather = await (weatherResponse.json());
+        console.log(currentWeather);
         let today = new Today(currentWeather);
         console.log(today);
 
