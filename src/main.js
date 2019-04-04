@@ -210,7 +210,7 @@ function displayMatches() {
             if (place.c.toLowerCase().search(cityName) === 0) {
                 return `<li><span class="name">${place.c}</span></li>`;
             }
-        }).join('');
+        }).filter(item => item).slice(0, 5).join('');
 
         suggestions.innerHTML = html;
         
