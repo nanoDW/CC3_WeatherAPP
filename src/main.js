@@ -122,7 +122,7 @@ class Today {
 async function fetchByCity(query) {
     try {
         // read current weather
-        let weatherResponse = await fetch(`http://api.openweathermap.org/data/2.5/weather?${searchMethod}=${query}&units=${units}&APPID=${appId}`);
+        let weatherResponse = await fetch(`https://api.openweathermap.org/data/2.5/weather?${searchMethod}=${query}&units=${units}&APPID=${appId}`);
         if (!weatherResponse.ok) {
             throw new Error();
         }
@@ -131,7 +131,7 @@ async function fetchByCity(query) {
         console.log(today);
 
         // read forecast
-        let forecastResponse = await fetch(`http://api.openweathermap.org/data/2.5/forecast?${searchMethod}=${query}&units=${units}&APPID=${appId}`);
+        let forecastResponse = await fetch(`https://api.openweathermap.org/data/2.5/forecast?${searchMethod}=${query}&units=${units}&APPID=${appId}`);
         if (!forecastResponse.ok) {
             throw new Error();
         }
@@ -148,17 +148,16 @@ async function fetchByCity(query) {
 async function fetchByCoordinates(lat, lon) {
     try {
         // read current weather
-        let weatherResponse = await fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=${units}&APPID=${appId}`)
+        let weatherResponse = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=${units}&APPID=${appId}`)
         if (!weatherResponse.ok) {
             throw new Error();
         }
         let currentWeather = await (weatherResponse.json());
-        console.log(currentWeather);
         let today = new Today(currentWeather);
         console.log(today);
 
         // read forecast
-        let forecastResponse = await fetch(`http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=${units}&APPID=${appId}`)
+        let forecastResponse = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=${units}&APPID=${appId}`)
         if (!forecastResponse.ok) {
             throw new Error();
         }
