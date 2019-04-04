@@ -231,8 +231,8 @@ function updateDOM(currentWeather) {
 
 //zrzynka z wes bosa
 function findMatches(wordToMatch, cities) {
+    const regexToMatch = new RegExp(wordToMatch, 'gi');
     return cities.filter(place => {
-        const regexToMatch = new RegExp(wordToMatch, 'gi');
         return place.c.match(regexToMatch);
     })
 }
