@@ -10,51 +10,51 @@
 
 <body>
     <!-- Initial Page-->
-    <section class="initial" hidden>
-        <i class="initial__icon initial__icon--big"></i>
-        <p class="initial__location">your location:</p>
-        <input class="initial__cityinput" placeholder="City"></input>
-        <button class="initial__button">Submit</button>
-        <i class="initial__icon initial__icon--small"></i>
+    <section id="initial" class="initial" hidden>
+        <i id="initial__icon--b" class="initial__icon initial__icon--big"></i>
+        <p id="initial__location" class="initial__location">your location:</p>
+        <input id="initial__cityinput" class="initial__cityinput" placeholder="City"></input>
+        <button id="initial__button" class="initial__button">Submit</button>
+        <i id="initial__icon--s class="initial__icon initial__icon--small"></i>
     </section>
 
     <!-- Main Page-->
     <section class="main">
 
         <!-- Header-->
-        <header class="main__header">
-            <div class="header__city">
-                <div class="city__name"></div>
-                <i class="city__icon"></i>
+        <header id="header" class="main__header">
+            <div id="city" class="header__city">
+                <div id="city__name" class="city__name"></div>
+                <i id="city__icon" class="city__icon"></i>
             </div>
-            <div class="header__date"></div>
+            <div id="header__date" class="header__date"></div>
         </header>
 
         <!-- Weather Today Basic Info-->
-        <div class="main__basic">
-            <p class="basic__description"></p>
-            <i class="basic__icon--big"></i>
-            <div class="basic__temperature"></div>
+        <div id="basic" class="main__basic">
+            <p id="basic__description" class="basic__description"></p>
+            <i id="basic__icon--big" class="basic__icon--big"></i>
+            <div class="basic__temperature"><span id="basic__temperature"></span><span> &#176 C</span></div>
         </div>
 
         <!-- Weather Today Details-->
         <div class="main__details">
             <ul class="details">
                 <li class="details__item">
-                    <i class="details__icon"></i>
-                    <div class="details__description">Wind:</div>
+                    <i id="wind__icon" class="details__icon"></i>
+                    <div  class="details__description">Wind:<span id="wind__description"></span></div>
                 </li>
                 <li class="details__item">
                     <i class="details__icon"></i>
-                    <div class="details__description">Pressure:</div>
+                    <div class="details__description">Pressure:<span id="pressure__description"></span></div>
                 </li>
                 <li class="details__item">
                     <i class="details__icon"></i>
-                    <div class="details__description">Humidity:</div>
+                    <div class="details__description">Humidity:<span id="humidity__description"></span></div>
                 </li>
                 <li class="details__item">
                     <i class="details__icon"></i>
-                    <div class="details__description">Precipitations:</div>
+                    <div class="details__description">Precipitations:<span id="precipitations__description"></span></div>
                 </li>
                 <li class="details__item">
                     <i class="details__icon"></i>
@@ -117,7 +117,7 @@
 
 
     <!-- form do wrzucenia w opowiednie miejsce w htmlu-->
-    <form id="cityInput">
+    <form id="cityInput" >
         <input type="text" placeholder="City">
         <ul class="suggestions"></ul>
         <input type="submit" value="Submit">

@@ -129,6 +129,7 @@ async function fetchByCity(query) {
         let currentWeather = await (weatherResponse.json());
         let today = new Today(currentWeather);
         console.log(today);
+        updateDOM(currentWeather);
 
         // read forecast
         let forecastResponse = await fetch(`https://api.openweathermap.org/data/2.5/forecast?${searchMethod}=${query}&units=${units}&APPID=${appId}`);
@@ -155,6 +156,7 @@ async function fetchByCoordinates(lat, lon) {
         let currentWeather = await (weatherResponse.json());
         let today = new Today(currentWeather);
         console.log(today);
+        updateDOM(currentWeather);
 
         // read forecast
         let forecastResponse = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=${units}&APPID=${appId}`)
@@ -190,6 +192,41 @@ function getCity(e) {
     if(city){
         fetchByCity(city);
     }
+}
+//Wrzutka pogody do HTML
+function updateDOM(currentWeather) {
+
+    //Weather Today Basic Info:
+    //OPIS
+    let basic__description = document.getElementById("basic__description");
+    let basicDescription = currentWeather.weather[0].description;
+    basic__description.innerText = ' ' + basicDescription;
+
+    //TEMPERATURA
+    let basic__temperature = document.getElementById("basic__temperature");
+    let basicTemperature = currentWeather.main.temp;
+    basic__temperature.innerText = ' ' + basicTemperature;
+
+    //Weather Today Details:
+    //WIATR
+    let wind__description = document.getElementById("wind__description");
+    let windDescription = currentWeather.wind.speed;
+    wind__description.innerText = ' ' + windDescription + ' m/s';
+
+    //CIŚNIENIE
+    let pressure__description = document.getElementById("pressure__description");
+    let pressureDescription = currentWeather.main.pressure;
+    pressure__description.innerText = ' ' + pressureDescription + ' hPa';
+
+    //WILGOTNOŚĆ
+    let humidity__description = document.getElementById("humidity__description");
+    let humidityDescription = currentWeather.main.humidity;
+    humidity__description.innerText = ' ' + humidityDescription + ' %';
+
+    //OPADY
+    let precipitations__description = document.getElementById("precipitations__description");
+    let precipitationsDescription = currentWeather.weather[0].description;
+    precipitations__description.innerText = ' ' + precipitationsDescription;
 }
 
 //zrzynka z wes bosa
