@@ -34,7 +34,7 @@ a {
     height: 100vh;
     display: flex;
     flex-direction: row;
-    align-items: stretch;
+    align-items: flex-start;
 }
 
 .today__wrapper {
@@ -45,10 +45,27 @@ a {
     
 }
 
-.main__info {
+.info__wrapper {
     width: 100%;
     display: flex;
     flex-direction: row;
+    justify-content: space-between;
+    align-items: stretch;
+}
+
+
+/*-------------------header------------*/
+
+.main__header {
+    width: 100%;
+    min-height: 5rem;
+    text-align: center;
+    padding: 2rem;
+}
+
+.city__icon,
+.city__name {
+    display: inline-block;
 }
 
 
@@ -58,13 +75,15 @@ a {
     padding: 0.5rem 0.5rem 0.5rem 1rem;
 }
 
+/*-----------------------------basics---------*/
 
-.main__header {
-    width: 100%;
-}
 
-.main__basics {
+.main__basic {
     width: 50%;
+    
+    flex-grow: 1;
+
+    
 }
 
 
@@ -76,13 +95,47 @@ a {
 
 }*/
 
-.basic__temperature {
-    font-size: 1.5rem;
-}
-#basic__temperature {
+.basic__description {
     font-size: 3rem;
 }
 
+.basic__temperature {
+    font-size: 2.5rem;
+}
+#basic__temperature {
+    font-size: 5rem;
+}
+
+
+/*----------------------------details-----------------------*/
+
+.main__details { 
+    width: 50%;
+    flex-grow: 1;
+    
+}
+
+.details__item {
+    display: flex;
+    flex-direction: row;
+    margin: 0.5rem 0;
+    padding: 0 1rem;
+}
+
+.details__icon,
+.details__description {
+    display: inline-block;
+    
+}
+
+.details__icon {
+        
+}
+
+.details__description {
+    line-height: 43.5px;
+    margin: 0 1rem;
+}
 
 /*----------------------------aside ------------------------------*/
 
