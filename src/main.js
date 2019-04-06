@@ -124,7 +124,7 @@ class Day {
         this.date = day[4].dt_txt_adjusted;
         this.icon = day[4].weather[0].icon;
         this.id = day[4].weather[0].id,
-            this.main = day[4].weather[0].main;
+        this.main = day[4].weather[0].main;
         this.description = day[4].weather[0].description;
         this.maxTemp = maxTemp;
         this.minTemp = minTemp;
