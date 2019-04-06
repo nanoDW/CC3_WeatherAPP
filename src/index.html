@@ -23,12 +23,22 @@
 
     <!-- Main Page-->
     <section class="main">
+        <div class="today__wrapper">
 
-        <!-- Header-->
-        <header id="header" class="main__header">
-            <div id="city" class="header__city">
-                <div id="city__name" class="city__name"></div>
-                <i id="city__icon" class="city__icon"></i>
+            <!-- Header-->
+            <header id="header" class="main__header">
+                <div id="city" class="header__city">
+                    <div id="city__name" class="city__name"></div>
+                    <i id="city__icon" class="city__icon"></i>
+                </div>
+                <div id="header__date" class="header__date"></div>
+            </header>
+
+            <!-- Weather Today Basic Info-->
+            <div id="basic" class="main__basic">
+                <p id="basic__description" class="basic__description"></p>
+                <i id="basic__icon--big" class="basic__icon--big"></i>
+                <div class="basic__temperature"><span id="basic__temperature"></span><span> &#176 C</span></div>
             </div>
             <div id="header__date" class="header__date"></div>
         </header>
@@ -40,34 +50,35 @@
             <div class="basic__temperature"><span id="basic__temperature"></span><span> &#176 C</span></div>
         </div>
 
-        <!-- Weather Today Details-->
-        <div class="main__details">
-            <ul class="details">
-                <li class="details__item">
-                    <i id="wind__icon" class="details__icon"></i>
-                    <div  class="details__description">Wind:<span id="wind__description"></span></div>
-                </li>
-                <li class="details__item">
-                    <i class="details__icon"></i>
-                    <div class="details__description">Pressure:<span id="pressure__description"></span></div>
-                </li>
-                <li class="details__item">
-                    <i class="details__icon"></i>
-                    <div class="details__description">Humidity:<span id="humidity__description"></span></div>
-                </li>
-                <li class="details__item">
-                    <i class="details__icon"></i>
-                    <div class="details__description">Precipitations:<span id="precipitations__description"></span></div>
-                </li>
-                <li class="details__item">
-                    <i class="details__icon"></i>
-                    <div class="details__description">Sunrise:</div>
-                </li>
-                <li class="details__item">
-                    <i class="details__icon"></i>
-                    <div class="details__description">Sunset:</div>
-                </li>
-            </ul>
+            <!-- Weather Today Details-->
+            <div class="main__details">
+                <ul class="details">
+                    <li class="details__item">
+                        <i id="wind__icon" class="details__icon"></i>
+                        <div  class="details__description">Wind:<span id="wind__description"></span></div>
+                    </li>
+                    <li class="details__item">
+                        <i class="details__icon"></i>
+                        <div class="details__description">Pressure:<span id="pressure__description"></span></div>
+                    </li>
+                    <li class="details__item">
+                        <i class="details__icon"></i>
+                        <div class="details__description">Humidity:<span id="humidity__description"></span></div>
+                    </li>
+                    <li class="details__item">
+                        <i class="details__icon"></i>
+                        <div class="details__description">Precipitations:<span id="precipitations__description"></span></div>
+                    </li>
+                    <li class="details__item">
+                        <i class="details__icon"></i>
+                        <div class="details__description">Sunrise:</div>
+                    </li>
+                    <li class="details__item">
+                        <i class="details__icon"></i>
+                        <div class="details__description">Sunset:</div>
+                    </li>
+                </ul>
+            </div>
         </div>
 
         <!-- Aside-->
@@ -77,10 +88,10 @@
             <div class="aside__settings settings">
                 <i class="settings__icon"></i>
                 <ul class="settings__list">
-                    <li class="settings__item">Change location</li>
-                    <li class="settings__item">Favorites</li>
-                    <li class="settings__item">Charts</li>
-                    <li class="settings__item">Settings</li>
+                    <li class="settings__item"><a href="#">Change location</a></li>
+                    <li class="settings__item"><a href="#">Favorites</a></li>
+                    <li class="settings__item"><a href="#">Info</a></li>
+                    <li class="settings__item"><a href="#">Settings</a></li>
                 </ul>
             </div>
 

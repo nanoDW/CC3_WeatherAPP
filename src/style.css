@@ -6,8 +6,100 @@
     --second-dark-bgcolor: #9E8C43;
     --prim-font-color: #fff;
     --second-font-color: #909090;
-    --prim-font-family: font-family: 'Roboto', sans-serif;
-    --second-font-family: font-family: 'Roboto Condensed', sans-serif;
+    --prim-font-family: 'Roboto', 'Arial', sans-serif;
+    --second-font-family: 'Roboto Condensed', 'Arial', sans-serif;
+}
+
+body {
+    background-image: linear-gradient(to right, var(--second-dark-bgcolor), var(--prim-dark-bgcolor));
+    font-family: var(--prim-font-family);
+    color: var(--prim-font-color);
+    font-size: 1.2rem;
+    line-height: 2rem;
+}
+
+.initial {
+    display: none;
+}
+
+a {
+    color: var(--prim-font-color);
+    text-decoration: none;
+}
+
+/*----------------------flexbox setting----------------------------*/
+
+.main {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+}
+
+.today__wrapper {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+}
+
+.main__info {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.main__aside {
+    width: 30%;
+    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: var(--prim-dark-bgcolor);
+}
+
+.main__aside > div {
+    
+}
+
+.settings__item a {
+    display: inline-block;
+    width: 50%;
+    padding: 0.5rem 0.5rem 0.5rem 1rem;
+}
+
+.main__aside > div a:hover {
+    background-color: var(--prim-dark-bgcolor);
+}
+
+.main__header {
+    width: 100%;
+}
+
+.main__basics {
+    width: 50%;
+}
 
 
+/*.main header,
+.main div,
+.main aside {
+    width: 90%;
+    margin: 0 auto;
+
+}*/
+
+.basic__temperature {
+    font-size: 1.5rem;
+}
+#basic__temperature {
+    font-size: 3rem;
+}
+
+
+
+
+.aside__settings {
+    background-color: var(--second-dark-bgcolor);
 }
