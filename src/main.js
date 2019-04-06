@@ -1,8 +1,12 @@
+const moment = require('moment-timezone')
 const appId = '0ae6c1ab2f3771bcf82ab2f9738ba430';
+const apiKey = 'ZA9KO8TP5SVD';
 let units = 'metric'; // jeśli chcemy wyświetlać tez w Fahrenheitach
 let searchMethod = 'q';    // jeśli chcemy umozliwić wyszukiwanie po czymś innym niz nazwa miasta
 
 // Geolocation
+navigator.geolocation.getCurrentPosition(geoSuccess, geoDenied);
+
 // Jak ktoś zaakceptuje
 function geoSuccess(position) {
    lat = position.coords.latitude;
@@ -12,9 +16,11 @@ function geoSuccess(position) {
 // Jak ktoś odmówi - w takim przypadku chyba nic nie robimy i czekamy na input?
 function geoDenied() {
     console.log('Geolocation denied');
+    // local storage
+    if (localStorage.city) {
+        fetchByCity(localStorage.city);
+    }
 }
-navigator.geolocation.getCurrentPosition(geoSuccess, geoDenied);
-
 
 const cityInput = document.getElementById('cityInput');
 const suggestions = document.querySelector('.suggestions');
@@ -24,10 +30,10 @@ let city = '';
 const data = './data/cities.json';
 const cities = [];
 
-//fetch file with names of cities for suggestions
-fetch(data)
-    .then(blob => blob.json())
-    .then(data => cities.push(...data))
+// fetch file with names of cities for suggestions
+// fetch(data)
+//     .then(blob => blob.json())
+//     .then(data => cities.push(...data))
 
 cityInput.addEventListener('submit', getCity);
 cityInput.addEventListener('change', displayMatches);
@@ -36,13 +42,40 @@ cityInput.addEventListener('keyup', displayMatches);
 
 // FINDING THE RIGHT DATA FOR THE FORECAST
 
-function findDates(forecast) {
+async function findTimeZone(lng, lat) {
+    try {
+        let timeZoneResponse = await fetch(`http://api.timezonedb.com/v2.1/get-time-zone?key=${apiKey}&format=json&by=position&lng=${lng}&lat=${lat}`);
+        if (!timeZoneResponse.ok) {
+            throw new Error();
+        }
+        let timeZone = await (timeZoneResponse.json());
+        zoneName = timeZone.zoneName;
+        console.log(zoneName)
+        return zoneName;
+    } catch (err) {
+        console.log(err.message);
+    }
+}
+
+function convertTimeZone(forecast, zoneName) {
+    forecast.list.map(el => {
+        let dateUtc = el.dt * 1000;
+        let dateUtcFormatted = moment.utc(dateUtc).format()
+        el.dt_txt_adjusted = moment.tz(dateUtcFormatted, zoneName).format()
+
+    })
+    findDates(forecast, zoneName);
+}
+
+
+function findDates(forecast, zoneName) {
     // filtering out the wather for today
     // filteredForecast is a new array with weather for tomorrow and the next days
-    let now = new Date();
-    now = now.toDateString();
+    let now = moment.utc(new Date())
+    now = now.format();
+    now = moment(now).tz(zoneName).format('ll');
     let filteredForecast = forecast.list.filter(function (el) {
-        return new Date(el.dt_txt).toDateString() !== now;
+        return moment(el.dt_txt_adjusted).tz(zoneName).format('ll') !== now;
     })
     let day1 = filteredForecast.slice(0, 8);
     let day2 = filteredForecast.slice(8, 16);
@@ -87,9 +120,9 @@ function minMaxTemp(days) {
 
 class Day {
     constructor(day, maxTemp, minTemp) {
-        this.date = day[4].dt_txt;
+        this.date = day[4].dt_txt_adjusted;
         this.id = day[4].weather[0].id,
-        this.main = day[4].weather[0].main;
+            this.main = day[4].weather[0].main;
         this.description = day[4].weather[0].description;
         this.maxTemp = maxTemp;
         this.minTemp = minTemp;
@@ -99,20 +132,20 @@ class Day {
 // FINDING THE RIGHT DATA FOR THE CURRENT WEATHER
 
 class Today {
-    constructor(currentWeather) {
+    constructor(currentWeather, timeZone) {
         this.city = currentWeather.name,
-        this.Clouds = currentWeather.clouds.all,
-        this.Humidity = currentWeather.main.humidity,
-        this.Pressure = currentWeather.main.pressure,
-        this.Temp = currentWeather.main.temp,
-        this.TempMax = currentWeather.main.temp_max,
-        this.TempMin = currentWeather.main.temp_min,
-        this.Sunrise = currentWeather.sys.sunrise,
-        this.Sunset = currentWeather.sys.sunset,
-        this.currDescription = currentWeather.weather[0].description,
-        this.Id = currentWeather.weather[0].id,
-        this.Main = currentWeather.weather[0].main,
-        this.Wind = currentWeather.wind.speed
+            this.Clouds = currentWeather.clouds.all,
+            this.Humidity = currentWeather.main.humidity,
+            this.Pressure = currentWeather.main.pressure,
+            this.Temp = currentWeather.main.temp,
+            this.TempMax = currentWeather.main.temp_max,
+            this.TempMin = currentWeather.main.temp_min,
+            this.Sunrise = moment(currentWeather.sys.sunrise * 1000).tz(timeZone).format(),
+            this.Sunset = moment(currentWeather.sys.sunset * 1000).tz(timeZone).format(),
+            this.currDescription = currentWeather.weather[0].description,
+            this.Id = currentWeather.weather[0].id,
+            this.Main = currentWeather.weather[0].main,
+            this.Wind = currentWeather.wind.speed
     }
 }
 
@@ -127,7 +160,8 @@ async function fetchByCity(query) {
             throw new Error();
         }
         let currentWeather = await (weatherResponse.json());
-        let today = new Today(currentWeather);
+        let timeZone = await findTimeZone(currentWeather.coord.lon, currentWeather.coord.lat);
+        let today = new Today(currentWeather, timeZone);
         console.log(today);
 
         // read forecast
@@ -136,7 +170,7 @@ async function fetchByCity(query) {
             throw new Error();
         }
         let forecast = await forecastResponse.json();
-        findDates(forecast);
+        convertTimeZone(forecast, zoneName);
         
     }
     catch(err) {
@@ -153,8 +187,9 @@ async function fetchByCoordinates(lat, lon) {
             throw new Error();
         }
         let currentWeather = await (weatherResponse.json());
-        let today = new Today(currentWeather);
-        console.log(today);
+         let timeZone = await findTimeZone(currentWeather.coord.lon, currentWeather.coord.lat);
+         let today = new Today(currentWeather, timeZone);
+         console.log(today);
 
         // read forecast
         let forecastResponse = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=${units}&APPID=${appId}`)
@@ -162,7 +197,7 @@ async function fetchByCoordinates(lat, lon) {
             throw new Error();
         }
         let forecast = await forecastResponse.json();
-        findDates(forecast);
+        convertTimeZone(forecast, zoneName);
 
         }
         catch (err) {
@@ -188,6 +223,7 @@ function getCity(e) {
     }
 
     if(city){
+        localStorage.setItem('city', city);
         fetchByCity(city);
     }
 }

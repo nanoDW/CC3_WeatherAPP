@@ -2,12 +2,12 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-    entry: './src/main.js',
+    entry: ['babel-polyfill', './src/main.js'],
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'bundle.js'
     },
-
+    mode: 'development',
     module: {
         rules: [
             {
@@ -22,7 +22,12 @@ module.exports = {
         },
         {
             test: /\.css$/,
-                use: ['style-loader', 'css-loader'],
+            use: ['style-loader', 'css-loader'],
+        },
+        {
+            test: /\.json$/,
+            exclude: /(node_modules|bower_components)/,
+            use: ['json-loader']
         }
     ]
     },
