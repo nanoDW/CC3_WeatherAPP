@@ -1,13 +1,13 @@
 const appId = '0ae6c1ab2f3771bcf82ab2f9738ba430';
 let units = 'metric'; // jeśli chcemy wyświetlać tez w Fahrenheitach
-let searchMethod = 'q';    // jeśli chcemy umozliwić wyszukiwanie po czymś innym niz nazwa miasta
+let searchMethod = 'q'; // jeśli chcemy umozliwić wyszukiwanie po czymś innym niz nazwa miasta
 
 // Geolocation
 // Jak ktoś zaakceptuje
 function geoSuccess(position) {
-   lat = position.coords.latitude;
-   lon = position.coords.longitude;
-   fetchByCoordinates(lat,lon);
+    lat = position.coords.latitude;
+    lon = position.coords.longitude;
+    fetchByCoordinates(lat, lon);
 }
 // Jak ktoś odmówi - w takim przypadku chyba nic nie robimy i czekamy na input?
 function geoDenied() {
@@ -49,8 +49,9 @@ function findDates(forecast) {
     let day3 = filteredForecast.slice(16, 24);
     let day4 = filteredForecast.slice(24, 32);
 
-    days = [day1, day2, day3, day4];
-    constructDays(days);
+    let days = [day1, day2, day3, day4];
+    days = constructDays(days);
+    updateForecast(days);
 }
 
 function constructDays(days) {
@@ -89,7 +90,7 @@ class Day {
     constructor(day, maxTemp, minTemp) {
         this.date = day[4].dt_txt;
         this.id = day[4].weather[0].id,
-        this.main = day[4].weather[0].main;
+            this.main = day[4].weather[0].main;
         this.description = day[4].weather[0].description;
         this.maxTemp = maxTemp;
         this.minTemp = minTemp;
@@ -101,18 +102,18 @@ class Day {
 class Today {
     constructor(currentWeather) {
         this.city = currentWeather.name,
-        this.Clouds = currentWeather.clouds.all,
-        this.Humidity = currentWeather.main.humidity,
-        this.Pressure = currentWeather.main.pressure,
-        this.Temp = currentWeather.main.temp,
-        this.TempMax = currentWeather.main.temp_max,
-        this.TempMin = currentWeather.main.temp_min,
-        this.Sunrise = currentWeather.sys.sunrise,
-        this.Sunset = currentWeather.sys.sunset,
-        this.currDescription = currentWeather.weather[0].description,
-        this.Id = currentWeather.weather[0].id,
-        this.Main = currentWeather.weather[0].main,
-        this.Wind = currentWeather.wind.speed
+            this.Clouds = currentWeather.clouds.all,
+            this.Humidity = currentWeather.main.humidity,
+            this.Pressure = currentWeather.main.pressure,
+            this.Temp = currentWeather.main.temp,
+            this.TempMax = currentWeather.main.temp_max,
+            this.TempMin = currentWeather.main.temp_min,
+            this.Sunrise = currentWeather.sys.sunrise,
+            this.Sunset = currentWeather.sys.sunset,
+            this.currDescription = currentWeather.weather[0].description,
+            this.Id = currentWeather.weather[0].id,
+            this.Main = currentWeather.weather[0].main,
+            this.Wind = currentWeather.wind.speed
     }
 }
 
@@ -138,12 +139,11 @@ async function fetchByCity(query) {
         }
         let forecast = await forecastResponse.json();
         findDates(forecast);
-        
-    }
-    catch(err) {
+
+    } catch (err) {
         console.log(err.message);
     }
-    
+
 }
 
 async function fetchByCoordinates(lat, lon) {
@@ -166,10 +166,9 @@ async function fetchByCoordinates(lat, lon) {
         let forecast = await forecastResponse.json();
         findDates(forecast);
 
-        }
-        catch (err) {
-            console.log(err.message);
-        }     
+    } catch (err) {
+        console.log(err.message);
+    }
 }
 
 // THE END OF FETCHING
@@ -189,7 +188,7 @@ function getCity(e) {
         city = '';
     }
 
-    if(city){
+    if (city) {
         fetchByCity(city);
     }
 }
@@ -229,6 +228,45 @@ function updateDOM(currentWeather) {
     precipitations__description.innerText = ' ' + precipitationsDescription;
 }
 
+function updateForecast(days) {
+    console.log(days);
+    //DATA 1
+    let first__data = document.getElementById("first__data");
+    let firstData = days[0].date;
+    first__data.innerText = ' ' + firstData;
+    //TEMPERATURA 1
+    let first__temperature = document.getElementById("first__temperature");
+    let firstTemperature = days[0].maxTemp;
+    first__temperature.innerText = ' ' + firstTemperature;
+    
+    //DATA 2
+    let second__data = document.getElementById("second__data");
+    let secondData = days[1].date;
+    second__data.innerText = ' ' + secondData;
+    //TEMPERATURA 2
+    let second__temperature = document.getElementById("second__temperature");
+    let secondTemperature = days[1].maxTemp;
+    second__temperature.innerText = ' ' + secondTemperature;
+
+    //DATA 3
+    let third__data = document.getElementById("third__data");
+    let thirdData = days[0].date;
+    third__data.innerText = ' ' + thirdData;
+    //TEMPERATURA 3
+    let third__temperature = document.getElementById("third__temperature");
+    let thirdTemperature = days[0].maxTemp;
+    third__temperature.innerText = ' ' + thirdTemperature;
+
+    //DATA 4
+    let fourth__data = document.getElementById("fourth__data");
+    let fourthData = days[0].date;
+    fourth__data.innerText = ' ' + fourthData;
+    //TEMPERATURA 4
+    let fourth__temperature = document.getElementById("fourth__temperature");
+    let fourthTemperature = days[0].maxTemp;
+    fourth__temperature.innerText = ' ' + fourthTemperature;
+
+}
 //zrzynka z wes bosa
 function findMatches(wordToMatch, cities) {
     const regexToMatch = new RegExp(wordToMatch, 'gi');
@@ -249,7 +287,7 @@ function displayMatches() {
         }).filter(item => item).slice(0, 5).join('');
 
         suggestions.innerHTML = html;
-        
+
     } else {
         suggestions.innerHTML = '';
     }
