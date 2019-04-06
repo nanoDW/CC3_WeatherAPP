@@ -210,7 +210,45 @@ function updateDOM(currentWeather) {
 
     //IKONA
     let basic__icon = document.getElementById("basic__icon");
-    basic__icon.src = 'https://openweathermap.org/img/w/' + currentWeather.weather[0].icon + '.png';
+    switch (currentWeather.weather[0].icon){
+        case '01d':
+        basic__icon.src = 'icons/01d.png'; break;
+        case '01n':
+        basic__icon.src = 'icons/01n.png'; break;
+        case '02d':
+        basic__icon.src = 'icons/02d.png'; break;
+        case '02n':
+        basic__icon.src = 'icons/02n.png'; break;
+        case '03d':
+        basic__icon.src = 'icons/03d.png'; break;
+        case '03n':
+        basic__icon.src = 'icons/03n.png'; break;
+        case '04d':
+        basic__icon.src = 'icons/04d.png'; break;
+        case '04n':
+        basic__icon.src = 'icons/04n.png'; break;
+        case '09d':
+        basic__icon.src = 'icons/09d.png'; break;
+        case '09n':
+        basic__icon.src = 'icons/09n.png'; break;
+        case '10d':
+        basic__icon.src = 'icons/10d.png'; break;
+        case '10n':
+        basic__icon.src = 'icons/10n.png'; break;
+        case '11d':
+        basic__icon.src = 'icons/11d.png'; break;
+        case '11n':
+        basic__icon.src = 'icons/11n.png'; break;
+        case '13d':
+        basic__icon.src = 'icons/13d.png'; break;
+        case '13n':
+        basic__icon.src = 'icons/13n.png'; break;
+        case '50d':
+        basic__icon.src = 'icons/50d.png'; break;
+        case '50n':
+        basic__icon.src = 'icons/50n.png'; break;
+    }
+    
 
     //<-----Weather Today Details----->
     //WIATR
@@ -227,11 +265,6 @@ function updateDOM(currentWeather) {
     let humidity__description = document.getElementById("humidity__description");
     let humidityDescription = currentWeather.main.humidity;
     humidity__description.innerText = ' ' + humidityDescription + ' %';
-
-    //OPADY
-    let precipitations__description = document.getElementById("precipitations__description");
-    let precipitationsDescription = currentWeather.weather[0].description;
-    precipitations__description.innerText = ' ' + precipitationsDescription;
 
 }
 
