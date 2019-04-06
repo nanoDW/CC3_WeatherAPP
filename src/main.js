@@ -247,45 +247,9 @@ function updateDOM(currentWeather) {
 
     //IKONA
     let basic__icon = document.getElementById("basic__icon");
-    switch (currentWeather.weather[0].icon){
-        case '01d':
-        basic__icon.src = 'icons/01d.png'; break;
-        case '01n':
-        basic__icon.src = 'icons/01n.png'; break;
-        case '02d':
-        basic__icon.src = 'icons/02d.png'; break;
-        case '02n':
-        basic__icon.src = 'icons/02n.png'; break;
-        case '03d':
-        basic__icon.src = 'icons/03d.png'; break;
-        case '03n':
-        basic__icon.src = 'icons/03n.png'; break;
-        case '04d':
-        basic__icon.src = 'icons/04d.png'; break;
-        case '04n':
-        basic__icon.src = 'icons/04n.png'; break;
-        case '09d':
-        basic__icon.src = 'icons/09d.png'; break;
-        case '09n':
-        basic__icon.src = 'icons/09n.png'; break;
-        case '10d':
-        basic__icon.src = 'icons/10d.png'; break;
-        case '10n':
-        basic__icon.src = 'icons/10n.png'; break;
-        case '11d':
-        basic__icon.src = 'icons/11d.png'; break;
-        case '11n':
-        basic__icon.src = 'icons/11n.png'; break;
-        case '13d':
-        basic__icon.src = 'icons/13d.png'; break;
-        case '13n':
-        basic__icon.src = 'icons/13n.png'; break;
-        case '50d':
-        basic__icon.src = 'icons/50d.png'; break;
-        case '50n':
-        basic__icon.src = 'icons/50n.png'; break;
-    }
-    
+    if (currentWeather.weather[0].icon !== 0){
+        basic__icon.src = 'icons/' + currentWeather.weather[0].icon + '.png';
+    }   
 
     //<-----Weather Today Details----->
     //WIATR
@@ -318,7 +282,9 @@ function updateForecast(days) {
     first__temperature.innerText = ' ' + firstTemperature;
     //IKONA 1
     let first__icon = document.getElementById("first__icon");
-    first__icon.src = 'https://openweathermap.org/img/w/' + days[0].icon + '.png';
+    if (days[0].icon !== 0) {
+        first__icon.src = 'icons/' + days[0].icon + '.png';
+    }
 
     //DATA 2
     let second__data = document.getElementById("second__data");
@@ -330,7 +296,9 @@ function updateForecast(days) {
     second__temperature.innerText = ' ' + secondTemperature;
     //IKONA 2
     let second__icon = document.getElementById("second__icon");
-    second__icon.src = 'https://openweathermap.org/img/w/' + days[1].icon + '.png';
+    if (days[1].icon !== 0) {
+        second__icon.src = 'icons/' + days[1].icon + '.png';
+    }
 
     //DATA 3
     let third__data = document.getElementById("third__data");
@@ -342,7 +310,9 @@ function updateForecast(days) {
     third__temperature.innerText = ' ' + thirdTemperature;
     //IKONA 3
     let third__icon = document.getElementById("third__icon");
-    third__icon.src = 'https://openweathermap.org/img/w/' + days[2].icon + '.png';
+    if (days[2].icon !== 0) {
+        third__icon.src = 'icons/' + days[2].icon + '.png';
+    }
 
     //DATA 4
     let fourth__data = document.getElementById("fourth__data");
@@ -354,7 +324,9 @@ function updateForecast(days) {
     fourth__temperature.innerText = ' ' + fourthTemperature;
     //IKONA 4
     let fourth__icon = document.getElementById("fourth__icon");
-    fourth__icon.src = 'https://openweathermap.org/img/w/' + days[3].icon + '.png';
+    if (days[3].icon !== 0) {
+        fourth__icon.src = 'icons/' + days[3].icon + '.png';
+    }
 
 }
 //zrzynka z wes bosa
