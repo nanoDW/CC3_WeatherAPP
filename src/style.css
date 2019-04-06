@@ -22,6 +22,10 @@ body {
     display: none;
 }
 
+a {
+    color: var(--prim-font-color);
+    text-decoration: none;
+}
 
 /*----------------------flexbox setting----------------------------*/
 
@@ -56,7 +60,17 @@ body {
 }
 
 .main__aside > div {
-    padding: 1rem;
+    
+}
+
+.settings__item a {
+    display: inline-block;
+    width: 50%;
+    padding: 0.5rem 0.5rem 0.5rem 1rem;
+}
+
+.main__aside > div a:hover {
+    background-color: var(--prim-dark-bgcolor);
 }
 
 .main__header {
