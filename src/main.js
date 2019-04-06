@@ -2,16 +2,16 @@ const moment = require('moment-timezone')
 const appId = '0ae6c1ab2f3771bcf82ab2f9738ba430';
 const apiKey = 'ZA9KO8TP5SVD';
 let units = 'metric'; // jeśli chcemy wyświetlać tez w Fahrenheitach
-let searchMethod = 'q';    // jeśli chcemy umozliwić wyszukiwanie po czymś innym niz nazwa miasta
+let searchMethod = 'q'; // jeśli chcemy umozliwić wyszukiwanie po czymś innym niz nazwa miasta
 
 // Geolocation
 navigator.geolocation.getCurrentPosition(geoSuccess, geoDenied);
 
 // Jak ktoś zaakceptuje
 function geoSuccess(position) {
-   lat = position.coords.latitude;
-   lon = position.coords.longitude;
-   fetchByCoordinates(lat,lon);
+    lat = position.coords.latitude;
+    lon = position.coords.longitude;
+    fetchByCoordinates(lat, lon);
 }
 // Jak ktoś odmówi - w takim przypadku chyba nic nie robimy i czekamy na input?
 function geoDenied() {
@@ -82,8 +82,9 @@ function findDates(forecast, zoneName) {
     let day3 = filteredForecast.slice(16, 24);
     let day4 = filteredForecast.slice(24, 32);
 
-    days = [day1, day2, day3, day4];
-    constructDays(days);
+    let days = [day1, day2, day3, day4];
+    days = constructDays(days);
+    updateForecast(days);
 }
 
 function constructDays(days) {
@@ -121,6 +122,7 @@ function minMaxTemp(days) {
 class Day {
     constructor(day, maxTemp, minTemp) {
         this.date = day[4].dt_txt_adjusted;
+        this.icon = day[4].weather[0].icon;
         this.id = day[4].weather[0].id,
             this.main = day[4].weather[0].main;
         this.description = day[4].weather[0].description;
@@ -145,7 +147,8 @@ class Today {
             this.currDescription = currentWeather.weather[0].description,
             this.Id = currentWeather.weather[0].id,
             this.Main = currentWeather.weather[0].main,
-            this.Wind = currentWeather.wind.speed
+            this.Wind = currentWeather.wind.speed,
+            this.Icon = currentWeather.weather[0].icon
     }
 }
 
@@ -163,6 +166,7 @@ async function fetchByCity(query) {
         let timeZone = await findTimeZone(currentWeather.coord.lon, currentWeather.coord.lat);
         let today = new Today(currentWeather, timeZone);
         console.log(today);
+        updateDOM(currentWeather);
 
         // read forecast
         let forecastResponse = await fetch(`https://api.openweathermap.org/data/2.5/forecast?${searchMethod}=${query}&units=${units}&APPID=${appId}`);
@@ -172,11 +176,11 @@ async function fetchByCity(query) {
         let forecast = await forecastResponse.json();
         convertTimeZone(forecast, zoneName);
         
-    }
-    catch(err) {
+    } catch(err) {
+
         console.log(err.message);
     }
-    
+
 }
 
 async function fetchByCoordinates(lat, lon) {
@@ -187,9 +191,10 @@ async function fetchByCoordinates(lat, lon) {
             throw new Error();
         }
         let currentWeather = await (weatherResponse.json());
-         let timeZone = await findTimeZone(currentWeather.coord.lon, currentWeather.coord.lat);
-         let today = new Today(currentWeather, timeZone);
-         console.log(today);
+        let timeZone = await findTimeZone(currentWeather.coord.lon, currentWeather.coord.lat);
+        let today = new Today(currentWeather, timeZone);
+        console.log(today);
+        updateDOM(currentWeather);
 
         // read forecast
         let forecastResponse = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=${units}&APPID=${appId}`)
@@ -199,10 +204,9 @@ async function fetchByCoordinates(lat, lon) {
         let forecast = await forecastResponse.json();
         convertTimeZone(forecast, zoneName);
 
-        }
-        catch (err) {
-            console.log(err.message);
-        }     
+    } catch (err) {
+        console.log(err.message);
+    }
 }
 
 // THE END OF FETCHING
@@ -222,12 +226,137 @@ function getCity(e) {
         city = '';
     }
 
-    if(city){
+    if (city) {
         localStorage.setItem('city', city);
         fetchByCity(city);
     }
 }
+//Wrzutka pogody do HTML
+function updateDOM(currentWeather) {
 
+    //<-----Weather Today Basic Info----->
+    //OPIS
+    let basic__description = document.getElementById("basic__description");
+    let basicDescription = currentWeather.weather[0].description;
+    basic__description.innerText = ' ' + basicDescription;
+
+    //TEMPERATURA
+    let basic__temperature = document.getElementById("basic__temperature");
+    let basicTemperature = currentWeather.main.temp;
+    basic__temperature.innerText = ' ' + basicTemperature;
+
+    //IKONA
+    let basic__icon = document.getElementById("basic__icon");
+    switch (currentWeather.weather[0].icon){
+        case '01d':
+        basic__icon.src = 'icons/01d.png'; break;
+        case '01n':
+        basic__icon.src = 'icons/01n.png'; break;
+        case '02d':
+        basic__icon.src = 'icons/02d.png'; break;
+        case '02n':
+        basic__icon.src = 'icons/02n.png'; break;
+        case '03d':
+        basic__icon.src = 'icons/03d.png'; break;
+        case '03n':
+        basic__icon.src = 'icons/03n.png'; break;
+        case '04d':
+        basic__icon.src = 'icons/04d.png'; break;
+        case '04n':
+        basic__icon.src = 'icons/04n.png'; break;
+        case '09d':
+        basic__icon.src = 'icons/09d.png'; break;
+        case '09n':
+        basic__icon.src = 'icons/09n.png'; break;
+        case '10d':
+        basic__icon.src = 'icons/10d.png'; break;
+        case '10n':
+        basic__icon.src = 'icons/10n.png'; break;
+        case '11d':
+        basic__icon.src = 'icons/11d.png'; break;
+        case '11n':
+        basic__icon.src = 'icons/11n.png'; break;
+        case '13d':
+        basic__icon.src = 'icons/13d.png'; break;
+        case '13n':
+        basic__icon.src = 'icons/13n.png'; break;
+        case '50d':
+        basic__icon.src = 'icons/50d.png'; break;
+        case '50n':
+        basic__icon.src = 'icons/50n.png'; break;
+    }
+    
+
+    //<-----Weather Today Details----->
+    //WIATR
+    let wind__description = document.getElementById("wind__description");
+    let windDescription = currentWeather.wind.speed;
+    wind__description.innerText = ' ' + windDescription + ' m/s';
+
+    //CIŚNIENIE
+    let pressure__description = document.getElementById("pressure__description");
+    let pressureDescription = currentWeather.main.pressure;
+    pressure__description.innerText = ' ' + pressureDescription + ' hPa';
+
+    //WILGOTNOŚĆ
+    let humidity__description = document.getElementById("humidity__description");
+    let humidityDescription = currentWeather.main.humidity;
+    humidity__description.innerText = ' ' + humidityDescription + ' %';
+
+}
+
+// <----- Forecast----->
+function updateForecast(days) {
+    console.log(days);
+    //DATA 1
+    let first__data = document.getElementById("first__data");
+    let firstData = days[0].date;
+    first__data.innerText = ' ' + firstData;
+    //TEMPERATURA 1
+    let first__temperature = document.getElementById("first__temperature");
+    let firstTemperature = days[0].maxTemp;
+    first__temperature.innerText = ' ' + firstTemperature;
+    //IKONA 1
+    let first__icon = document.getElementById("first__icon");
+    first__icon.src = 'https://openweathermap.org/img/w/' + days[0].icon + '.png';
+
+    //DATA 2
+    let second__data = document.getElementById("second__data");
+    let secondData = days[1].date;
+    second__data.innerText = ' ' + secondData;
+    //TEMPERATURA 2
+    let second__temperature = document.getElementById("second__temperature");
+    let secondTemperature = days[1].maxTemp;
+    second__temperature.innerText = ' ' + secondTemperature;
+    //IKONA 2
+    let second__icon = document.getElementById("second__icon");
+    second__icon.src = 'https://openweathermap.org/img/w/' + days[1].icon + '.png';
+
+    //DATA 3
+    let third__data = document.getElementById("third__data");
+    let thirdData = days[2].date;
+    third__data.innerText = ' ' + thirdData;
+    //TEMPERATURA 3
+    let third__temperature = document.getElementById("third__temperature");
+    let thirdTemperature = days[2].maxTemp;
+    third__temperature.innerText = ' ' + thirdTemperature;
+    //IKONA 3
+    let third__icon = document.getElementById("third__icon");
+    third__icon.src = 'https://openweathermap.org/img/w/' + days[2].icon + '.png';
+
+    //DATA 4
+    let fourth__data = document.getElementById("fourth__data");
+    let fourthData = days[3].date;
+    fourth__data.innerText = ' ' + fourthData;
+    //TEMPERATURA 4
+    let fourth__temperature = document.getElementById("fourth__temperature");
+    let fourthTemperature = days[3].maxTemp;
+    fourth__temperature.innerText = ' ' + fourthTemperature;
+    //IKONA 4
+    let fourth__icon = document.getElementById("fourth__icon");
+    fourth__icon.src = 'https://openweathermap.org/img/w/' + days[3].icon + '.png';
+
+}
 //zrzynka z wes bosa
 function findMatches(wordToMatch, cities) {
     const regexToMatch = new RegExp(wordToMatch, 'gi');
@@ -248,7 +377,7 @@ function displayMatches() {
         }).filter(item => item).slice(0, 5).join('');
 
         suggestions.innerHTML = html;
-        
+
     } else {
         suggestions.innerHTML = '';
     }

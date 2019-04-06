@@ -6,65 +6,79 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Best Weather App Ever</title>
-</head>
+
+    <link href="cssreset.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+    </head>
 
 <body>
     <!-- Initial Page-->
-    <section class="initial" hidden>
-        <i class="initial__icon initial__icon--big"></i>
-        <p class="initial__location">your location:</p>
-        <input class="initial__cityinput" placeholder="City"></input>
-        <button class="initial__button">Submit</button>
-        <i class="initial__icon initial__icon--small"></i>
+    <section id="initial" class="initial" hidden>
+        <i id="initial__icon--b" class="initial__icon initial__icon--big"></i>
+        <p id="initial__location" class="initial__location">your location:</p>
+        <input id="initial__cityinput" class="initial__cityinput" placeholder="City"></input>
+        <button id="initial__button" class="initial__button">Submit</button>
+        <i id="initial__icon--s class="initial__icon initial__icon--small"></i>
     </section>
 
     <!-- Main Page-->
     <section class="main">
+        <div class="today__wrapper">
 
-        <!-- Header-->
-        <header class="main__header">
-            <div class="header__city">
-                <div class="city__name"></div>
-                <i class="city__icon"></i>
+            <!-- Header-->
+            <header id="header" class="main__header">
+                <div id="city" class="header__city">
+                    <div id="city__name" class="city__name"></div>
+                    <i id="city__icon" class="city__icon"></i>
+                </div>
+                <div id="header__date" class="header__date"></div>
+            </header>
+
+            <!-- Weather Today Basic Info-->
+            <div id="basic" class="main__basic">
+                <p id="basic__description" class="basic__description"></p>
+                <i id="basic__icon--big" class="basic__icon--big"></i>
+                <div class="basic__temperature"><span id="basic__temperature"></span><span> &#176 C</span></div>
             </div>
-            <div class="header__date"></div>
+            <div id="header__date" class="header__date"></div>
         </header>
 
         <!-- Weather Today Basic Info-->
-        <div class="main__basic">
-            <p class="basic__description"></p>
-            <i class="basic__icon--big"></i>
-            <div class="basic__temperature"></div>
+        <div id="basic" class="main__basic">
+            <p id="basic__description" class="basic__description"></p>
+            <i class="basic__icon"><img id="basic__icon"></i>
+            <div class="basic__temperature"><span id="basic__temperature"></span><span> &#176 C</span></div>
         </div>
 
-        <!-- Weather Today Details-->
-        <div class="main__details">
-            <ul class="details">
-                <li class="details__item">
-                    <i class="details__icon"></i>
-                    <div class="details__description">Wind:</div>
-                </li>
-                <li class="details__item">
-                    <i class="details__icon"></i>
-                    <div class="details__description">Pressure:</div>
-                </li>
-                <li class="details__item">
-                    <i class="details__icon"></i>
-                    <div class="details__description">Humidity:</div>
-                </li>
-                <li class="details__item">
-                    <i class="details__icon"></i>
-                    <div class="details__description">Precipitations:</div>
-                </li>
-                <li class="details__item">
-                    <i class="details__icon"></i>
-                    <div class="details__description">Sunrise:</div>
-                </li>
-                <li class="details__item">
-                    <i class="details__icon"></i>
-                    <div class="details__description">Sunset:</div>
-                </li>
-            </ul>
+            <!-- Weather Today Details-->
+            <div class="main__details">
+                <ul class="details">
+                    <li class="details__item">
+                        <i class="details__icon"><img id="wind__icon" src="icons/wind.png" ></i>
+                        <div  class="details__description">Wind:<span id="wind__description"></span></div>
+                    </li>
+                    <li class="details__item">
+                        <i class="details__icon"><img id="presure__icon" src="icons/pressure.png" ></i>
+                        <div class="details__description">Pressure:<span id="pressure__description"></span></div>
+                    </li>
+                    <li class="details__item">
+                        <i class="details__icon"><img id="humidity__icon" src="icons/humidity.png"></i>
+                        <div class="details__description">Humidity:<span id="humidity__description"></span></div>
+                    </li>
+                   <li class="details__item">
+                        <i class="details__icon"></i>
+                        <div class="details__description"><span id="precipitations__description"></span></div>
+                   </li>
+                    <li class="details__item">
+                        <i class="details__icon"><img id="sunrise__icon" src="icons/sunrise.png"></i>
+                        <div class="details__description">Sunrise:</div>
+                    </li>
+                    <li class="details__item">
+                        <i class="details__icon"><img id="sunset__icon" src="icons/sunset.png"></i>
+                        <div class="details__description">Sunset:</div>
+                    </li>
+                </ul>
+            </div>
         </div>
 
         <!-- Aside-->
@@ -74,10 +88,10 @@
             <div class="aside__settings settings">
                 <i class="settings__icon"></i>
                 <ul class="settings__list">
-                    <li class="settings__item">Change location</li>
-                    <li class="settings__item">Favorites</li>
-                    <li class="settings__item">Charts</li>
-                    <li class="settings__item">Settings</li>
+                    <li class="settings__item"><a href="#">Change location</a></li>
+                    <li class="settings__item"><a href="#">Favorites</a></li>
+                    <li class="settings__item"><a href="#">Info</a></li>
+                    <li class="settings__item"><a href="#">Settings</a></li>
                 </ul>
             </div>
 
@@ -85,29 +99,24 @@
             <div class="aside_five">
                 <ul class="five">
                     <li class="five__item">
-                        <i class="five__icon"></i>
-                        <div class="five__data"></div>
-                        <div class="five__temperature"></div>
+                        <i class="five__icon"><img id=first__icon></i>
+                        <div class="five__data"><span id = first__data></span></div>
+                        <div class="five__temperature"><span id = first__temperature></span><span> &#176 C</span></div>
                     </li>
                     <li class="five__item">
-                        <i class="five__icon"></i>
-                        <div class="five__data"></div>
-                        <div class="five__temperature"></div>
+                        <i class="five__icon"><img id=second__icon></i>
+                        <div class="five__data"><span id=second__data></span></div>
+                        <div class="five__temperature"><span id=second__temperature></span><span> &#176 C</span></div>
                     </li>
                     <li class="five__item">
-                        <i class="five__icon"></i>
-                        <div class="five__data"></div>
-                        <div class="five__temperature"></div>
+                        <i class="five__icon"><img id=third__icon></i>
+                        <div class="five__data"><span id=third__data></div>
+                        <div class="five__temperature"><span id=third__temperature></span><span> &#176 C</span></div>
                     </li>
                     <li class="five__item">
-                        <i class="five__icon"></i>
-                        <div class="five__data"></div>
-                        <div class="five__temperature"></div>
-                    </li>
-                    <li class="five__item">
-                        <i class="five__icon"></i>
-                        <div class="five__data"></div>
-                        <div class="five__temperature"></div>
+                        <i class="five__icon"><img id=fourth__icon></i>
+                        <div class="five__data"><span id=fourth__data></div>
+                        <div class="five__temperature"><span id=fourth__temperature></span><span> &#176 C</span></div>
                     </li>
                 </ul>
             </div>
@@ -117,7 +126,7 @@
 
 
     <!-- form do wrzucenia w opowiednie miejsce w htmlu-->
-    <form id="cityInput">
+    <form id="cityInput" >
         <input type="text" placeholder="City">
         <ul class="suggestions"></ul>
         <input type="submit" value="Submit">
@@ -125,6 +134,13 @@
 
     <!-- JS -->
     <!-- <script src="main.js"></script> -->
+
+    <!-- credit to authors of icons -->
+    <div>Icons made by <a href="https://www.freepik.com/" title="Freepik">Freepik</a> from <a
+            href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a
+            href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>
+    </div>
+
 
 
 </body>
