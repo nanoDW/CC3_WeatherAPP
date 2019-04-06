@@ -89,6 +89,7 @@ function minMaxTemp(days) {
 class Day {
     constructor(day, maxTemp, minTemp) {
         this.date = day[4].dt_txt;
+        this.icon = day[4].weather[0].icon;
         this.id = day[4].weather[0].id,
             this.main = day[4].weather[0].main;
         this.description = day[4].weather[0].description;
@@ -113,7 +114,8 @@ class Today {
             this.currDescription = currentWeather.weather[0].description,
             this.Id = currentWeather.weather[0].id,
             this.Main = currentWeather.weather[0].main,
-            this.Wind = currentWeather.wind.speed
+            this.Wind = currentWeather.wind.speed,
+            this.Icon = currentWeather.weather[0].icon
     }
 }
 
@@ -195,7 +197,7 @@ function getCity(e) {
 //Wrzutka pogody do HTML
 function updateDOM(currentWeather) {
 
-    //Weather Today Basic Info:
+    //<-----Weather Today Basic Info----->
     //OPIS
     let basic__description = document.getElementById("basic__description");
     let basicDescription = currentWeather.weather[0].description;
@@ -206,7 +208,11 @@ function updateDOM(currentWeather) {
     let basicTemperature = currentWeather.main.temp;
     basic__temperature.innerText = ' ' + basicTemperature;
 
-    //Weather Today Details:
+    //IKONA
+    let basic__icon = document.getElementById("basic__icon");
+    basic__icon.src = 'https://openweathermap.org/img/w/' + currentWeather.weather[0].icon + '.png';
+
+    //<-----Weather Today Details----->
     //WIATR
     let wind__description = document.getElementById("wind__description");
     let windDescription = currentWeather.wind.speed;
@@ -226,8 +232,10 @@ function updateDOM(currentWeather) {
     let precipitations__description = document.getElementById("precipitations__description");
     let precipitationsDescription = currentWeather.weather[0].description;
     precipitations__description.innerText = ' ' + precipitationsDescription;
+
 }
 
+// <----- Forecast----->
 function updateForecast(days) {
     console.log(days);
     //DATA 1
@@ -238,7 +246,10 @@ function updateForecast(days) {
     let first__temperature = document.getElementById("first__temperature");
     let firstTemperature = days[0].maxTemp;
     first__temperature.innerText = ' ' + firstTemperature;
-    
+    //IKONA 1
+    let first__icon = document.getElementById("first__icon");
+    first__icon.src = 'https://openweathermap.org/img/w/' + days[0].icon + '.png';
+
     //DATA 2
     let second__data = document.getElementById("second__data");
     let secondData = days[1].date;
@@ -247,24 +258,33 @@ function updateForecast(days) {
     let second__temperature = document.getElementById("second__temperature");
     let secondTemperature = days[1].maxTemp;
     second__temperature.innerText = ' ' + secondTemperature;
+    //IKONA 2
+    let second__icon = document.getElementById("second__icon");
+    second__icon.src = 'https://openweathermap.org/img/w/' + days[1].icon + '.png';
 
     //DATA 3
     let third__data = document.getElementById("third__data");
-    let thirdData = days[0].date;
+    let thirdData = days[2].date;
     third__data.innerText = ' ' + thirdData;
     //TEMPERATURA 3
     let third__temperature = document.getElementById("third__temperature");
-    let thirdTemperature = days[0].maxTemp;
+    let thirdTemperature = days[2].maxTemp;
     third__temperature.innerText = ' ' + thirdTemperature;
+    //IKONA 3
+    let third__icon = document.getElementById("third__icon");
+    third__icon.src = 'https://openweathermap.org/img/w/' + days[2].icon + '.png';
 
     //DATA 4
     let fourth__data = document.getElementById("fourth__data");
-    let fourthData = days[0].date;
+    let fourthData = days[3].date;
     fourth__data.innerText = ' ' + fourthData;
     //TEMPERATURA 4
     let fourth__temperature = document.getElementById("fourth__temperature");
-    let fourthTemperature = days[0].maxTemp;
+    let fourthTemperature = days[3].maxTemp;
     fourth__temperature.innerText = ' ' + fourthTemperature;
+    //IKONA 4
+    let fourth__icon = document.getElementById("fourth__icon");
+    fourth__icon.src = 'https://openweathermap.org/img/w/' + days[3].icon + '.png';
 
 }
 //zrzynka z wes bosa
