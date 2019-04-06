@@ -11,9 +11,11 @@
 }
 
 body {
-    background-image: linear-gradient(to right, var(--second-light-bgcolor), var(--prim-dark-bgcolor));
+    background-image: linear-gradient(to right, var(--second-dark-bgcolor), var(--prim-dark-bgcolor));
     font-family: var(--prim-font-family);
     color: var(--prim-font-color);
+    font-size: 1.2rem;
+    line-height: 2rem;
 }
 
 .initial {
@@ -23,24 +25,67 @@ body {
 
 /*----------------------flexbox setting----------------------------*/
 
-
-
 .main {
     width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+}
+
+.today__wrapper {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     
 }
 
-.main header,
+.main__info {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.main__aside {
+    width: 30%;
+    min-width: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: var(--prim-dark-bgcolor);
+}
+
+.main__aside > div {
+    padding: 1rem;
+}
+
+.main__header {
+    width: 100%;
+}
+
+.main__basics {
+    width: 50%;
+}
+
+
+/*.main header,
 .main div,
 .main aside {
     width: 90%;
     margin: 0 auto;
 
-}
+}*/
 
 .basic__temperature {
     font-size: 1.5rem;
 }
 #basic__temperature {
     font-size: 3rem;
+}
+
+
+
+
+.aside__settings {
+    background-color: var(--second-dark-bgcolor);
 }
