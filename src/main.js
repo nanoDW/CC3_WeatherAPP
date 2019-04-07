@@ -1,4 +1,6 @@
-const moment = require('moment-timezone')
+import './cssreset.css';
+import './style.css';
+import moment from 'moment-timezone';
 const appId = '0ae6c1ab2f3771bcf82ab2f9738ba430';
 const apiKey = 'ZA9KO8TP5SVD';
 let units = 'metric'; // jeśli chcemy wyświetlać tez w Fahrenheitach
@@ -9,8 +11,8 @@ navigator.geolocation.getCurrentPosition(geoSuccess, geoDenied);
 
 // Jak ktoś zaakceptuje
 function geoSuccess(position) {
-    lat = position.coords.latitude;
-    lon = position.coords.longitude;
+    let lat = position.coords.latitude;
+    let lon = position.coords.longitude;
     fetchByCoordinates(lat, lon);
 }
 // Jak ktoś odmówi - w takim przypadku chyba nic nie robimy i czekamy na input?
@@ -31,9 +33,9 @@ const data = './data/cities.json';
 const cities = [];
 
 // fetch file with names of cities for suggestions
-// fetch(data)
-//     .then(blob => blob.json())
-//     .then(data => cities.push(...data))
+ fetch(data)
+     .then(blob => blob.json())
+     .then(data => cities.push(...data))
 
 cityInput.addEventListener('submit', getCity);
 cityInput.addEventListener('change', displayMatches);
@@ -49,7 +51,7 @@ async function findTimeZone(lng, lat) {
             throw new Error();
         }
         let timeZone = await (timeZoneResponse.json());
-        zoneName = timeZone.zoneName;
+        let zoneName = timeZone.zoneName;
         console.log(zoneName)
         return zoneName;
     } catch (err) {
@@ -88,9 +90,9 @@ function findDates(forecast, zoneName) {
 }
 
 function constructDays(days) {
-    minMax = minMaxTemp(days);
-    maxTemps = minMax[0];
-    minTemps = minMax[1];
+    let minMax = minMaxTemp(days);
+    let maxTemps = minMax[0];
+    let minTemps = minMax[1];
 
     let day1 = new Day(days[0], maxTemps[0], minTemps[0]);
     let day2 = new Day(days[1], maxTemps[1], minTemps[1]);
@@ -134,7 +136,7 @@ class Day {
 // FINDING THE RIGHT DATA FOR THE CURRENT WEATHER
 
 class Today {
-    constructor(currentWeather, timeZone) {
+    constructor(currentWeather, zoneName) {
         this.city = currentWeather.name,
             this.Clouds = currentWeather.clouds.all,
             this.Humidity = currentWeather.main.humidity,
@@ -142,8 +144,8 @@ class Today {
             this.Temp = currentWeather.main.temp,
             this.TempMax = currentWeather.main.temp_max,
             this.TempMin = currentWeather.main.temp_min,
-            this.Sunrise = moment(currentWeather.sys.sunrise * 1000).tz(timeZone).format(),
-            this.Sunset = moment(currentWeather.sys.sunset * 1000).tz(timeZone).format(),
+            this.Sunrise = moment(currentWeather.sys.sunrise * 1000).tz(zoneName).format(),
+            this.Sunset = moment(currentWeather.sys.sunset * 1000).tz(zoneName).format(),
             this.currDescription = currentWeather.weather[0].description,
             this.Id = currentWeather.weather[0].id,
             this.Main = currentWeather.weather[0].main,
@@ -163,8 +165,8 @@ async function fetchByCity(query) {
             throw new Error();
         }
         let currentWeather = await (weatherResponse.json());
-        let timeZone = await findTimeZone(currentWeather.coord.lon, currentWeather.coord.lat);
-        let today = new Today(currentWeather, timeZone);
+        let zoneName = await findTimeZone(currentWeather.coord.lon, currentWeather.coord.lat);
+        let today = new Today(currentWeather, zoneName);
         console.log(today);
         updateDOM(currentWeather);
 
@@ -191,8 +193,8 @@ async function fetchByCoordinates(lat, lon) {
             throw new Error();
         }
         let currentWeather = await (weatherResponse.json());
-        let timeZone = await findTimeZone(currentWeather.coord.lon, currentWeather.coord.lat);
-        let today = new Today(currentWeather, timeZone);
+        let zoneName = await findTimeZone(currentWeather.coord.lon, currentWeather.coord.lat);
+        let today = new Today(currentWeather, zoneName);
         console.log(today);
         updateDOM(currentWeather);
 
@@ -217,7 +219,7 @@ function getCity(e) {
     //list of special chars that we dont want in our string
     const regex = /(--)|[!$%^&*()_+|~=`{}\[\]:\/;<>?,.@#]/;
 
-    city = e.target[0].value.toLowerCase().trim();
+    let city = e.target[0].value.toLowerCase().trim();
 
     if (!city) {
         console.log('FormField is empty');
