@@ -80,10 +80,9 @@ a {
 
 .main__basic {
     width: 50%;
-    
     flex-grow: 1;
-
-    
+    padding: 4rem;
+        
 }
 
 
@@ -97,9 +96,14 @@ a {
 
 .basic__description {
     font-size: 3rem;
+    text-align: right;
 }
 
 .basic__temperature {
+    position: relative;
+    right: 0;
+    top: 3.5rem;
+    text-align: right;
     font-size: 2.5rem;
 }
 #basic__temperature {
@@ -112,7 +116,13 @@ a {
 .main__details { 
     width: 50%;
     flex-grow: 1;
-    
+    padding: 2rem;
+}
+
+.details {
+    position: relative;
+    top: 50%;
+    left: 3rem;
 }
 
 .details__item {
@@ -120,6 +130,7 @@ a {
     flex-direction: row;
     margin: 0.5rem 0;
     padding: 0 1rem;
+    text-align: right;
 }
 
 .details__icon,
