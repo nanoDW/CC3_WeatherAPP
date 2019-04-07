@@ -6,6 +6,10 @@ const apiKey = 'ZA9KO8TP5SVD';
 let units = 'metric'; // jeśli chcemy wyświetlać tez w Fahrenheitach
 let searchMethod = 'q'; // jeśli chcemy umozliwić wyszukiwanie po czymś innym niz nazwa miasta
 
+//Language of date (days,months). change to 'en' for english
+let momentLang = 'pl';
+moment.locale(momentLang);
+
 // Geolocation
 navigator.geolocation.getCurrentPosition(geoSuccess, geoDenied);
 
