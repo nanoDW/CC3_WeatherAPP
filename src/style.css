@@ -27,13 +27,14 @@ a {
     text-decoration: none;
 }
 
-/*----------------------flexbox setting----------------------------*/
+/*----------------------main----------------------------*/
 
 .main {
     width: 100%;
+    height: 100vh;
     display: flex;
     flex-direction: row;
-    align-items: stretch;
+    align-items: flex-start;
 }
 
 .today__wrapper {
@@ -44,41 +45,45 @@ a {
     
 }
 
-.main__info {
+.info__wrapper {
     width: 100%;
     display: flex;
     flex-direction: row;
-}
-
-.main__aside {
-    width: 30%;
-    min-width: 300px;
-    display: flex;
-    flex-direction: column;
     justify-content: space-between;
-    background-color: var(--prim-dark-bgcolor);
+    align-items: stretch;
 }
 
-.main__aside > div {
-    
-}
 
-.settings__item a {
-    display: inline-block;
-    width: 50%;
-    padding: 0.5rem 0.5rem 0.5rem 1rem;
-}
-
-.main__aside > div a:hover {
-    background-color: var(--prim-dark-bgcolor);
-}
+/*-------------------header------------*/
 
 .main__header {
     width: 100%;
+    min-height: 5rem;
+    text-align: center;
+    padding: 2rem;
 }
 
-.main__basics {
+.city__icon,
+.city__name {
+    display: inline-block;
+}
+
+
+.settings__item a {
+    display: inline-block;
+    width: 200px;
+    padding: 0.5rem 0.5rem 0.5rem 1rem;
+}
+
+/*-----------------------------basics---------*/
+
+
+.main__basic {
     width: 50%;
+    
+    flex-grow: 1;
+
+    
 }
 
 
@@ -90,16 +95,85 @@ a {
 
 }*/
 
-.basic__temperature {
-    font-size: 1.5rem;
-}
-#basic__temperature {
+.basic__description {
     font-size: 3rem;
 }
 
+.basic__temperature {
+    font-size: 2.5rem;
+}
+#basic__temperature {
+    font-size: 5rem;
+}
 
 
+/*----------------------------details-----------------------*/
+
+.main__details { 
+    width: 50%;
+    flex-grow: 1;
+    
+}
+
+.details__item {
+    display: flex;
+    flex-direction: row;
+    margin: 0.5rem 0;
+    padding: 0 1rem;
+}
+
+.details__icon,
+.details__description {
+    display: inline-block;
+    
+}
+
+.details__icon {
+        
+}
+
+.details__description {
+    line-height: 43.5px;
+    margin: 0 1rem;
+}
+
+/*----------------------------aside ------------------------------*/
+
+.main__aside {
+    width: 30%;
+    min-width: 300px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    background-color: var(--prim-dark-bgcolor);
+}
+
+.main__aside > div {}
+
+.main__aside>div a:hover {
+    background-color: var(--prim-dark-bgcolor);
+}
 
 .aside__settings {
     background-color: var(--second-dark-bgcolor);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.settings__icon,
+.settings__list {
+    flex-grow: 1;
+}
+
+#settings__icon {
+    filter: opacity(0.5);
+}
+
+
+
+.five__item {
+    border-top: solid 1px var(--prim-font-color);
 }
