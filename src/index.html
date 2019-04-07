@@ -32,40 +32,42 @@
                 <div id="header__date" class="header__date"></div>
             </header>
 
-            <!-- Weather Today Basic Info-->
-            <div id="basic" class="main__basic">
-                <p id="basic__description" class="basic__description"></p>
-                <i id="basic__icon" class="basic__icon"></i>
-                <div class="basic__temperature"><span id="basic__temperature"></span><span> &#176 C</span></div>
-            </div>
-            <div id="header__date" class="header__date"></div>
-        </header>
+            <div class="weather__wrapper">
 
+                <!-- Weather Today Basic Info-->
+                <div id="basic" class="main__basic">
+                    <p id="basic__description" class="basic__description"></p>
+                    <i id="basic__icon" class="basic__icon"></i>
+                    <div class="basic__temperature"><span id="basic__temperature"></span><span> &#176 C</span></div>
+                </div>
+                <div id="header__date" class="header__date"></div>
+        
  
-            <!-- Weather Today Details-->
-            <div class="main__details">
-                <ul class="details">
-                    <li class="details__item">
-                        <i class="details__icon"><img id="wind__icon" src="icons/wind.png" ></i>
-                        <div  class="details__description">Wind:<span id="wind__description"></span></div>
-                    </li>
-                    <li class="details__item">
-                        <i class="details__icon"><img id="presure__icon" src="icons/pressure.png" ></i>
-                        <div class="details__description">Pressure:<span id="pressure__description"></span></div>
-                    </li>
-                    <li class="details__item">
-                        <i class="details__icon"><img id="humidity__icon" src="icons/humidity.png"></i>
-                        <div class="details__description">Humidity:<span id="humidity__description"></span></div>
-                    </li>
-                    <li class="details__item">
-                        <i class="details__icon"><img id="sunrise__icon" src="icons/sunrise.png"></i>
-                        <div class="details__description">Sunrise:</div>
-                    </li>
-                    <li class="details__item">
-                        <i class="details__icon"><img id="sunset__icon" src="icons/sunset.png"></i>
-                        <div class="details__description">Sunset:</div>
-                    </li>
-                </ul>
+                <!-- Weather Today Details-->
+                <div class="main__details">
+                    <ul class="details">
+                        <li class="details__item">
+                            <i class="details__icon"><img id="wind__icon" src="icons/wind.png" ></i>
+                            <div  class="details__description">Wind:<span id="wind__description"></span></div>
+                        </li>
+                        <li class="details__item">
+                            <i class="details__icon"><img id="presure__icon" src="icons/pressure.png" ></i>
+                            <div class="details__description">Pressure:<span id="pressure__description"></span></div>
+                        </li>
+                        <li class="details__item">
+                            <i class="details__icon"><img id="humidity__icon" src="icons/humidity.png"></i>
+                            <div class="details__description">Humidity:<span id="humidity__description"></span></div>
+                        </li>
+                        <li class="details__item">
+                            <i class="details__icon"><img id="sunrise__icon" src="icons/sunrise.png"></i>
+                            <div class="details__description">Sunrise:</div>
+                        </li>
+                        <li class="details__item">
+                            <i class="details__icon"><img id="sunset__icon" src="icons/sunset.png"></i>
+                            <div class="details__description">Sunset:</div>
+                        </li>
+                    </ul>
+                </div>
             </div>
         </div>
 
@@ -74,37 +76,37 @@
 
             <!-- Settings -->
             <div class="aside__settings settings">
-                <i class="settings__icon"><img id ="settings__icon" src = "icons/settings.png"></i>
                 <ul class="settings__list">
                     <li class="settings__item"><a href="#">Change location</a></li>
                     <li class="settings__item"><a href="#">Favorites</a></li>
                     <li class="settings__item"><a href="#">Info</a></li>
                     <li class="settings__item"><a href="#">Settings</a></li>
                 </ul>
+                <i class="settings__icon"><img id="settings__icon" src="icons/settings.png"></i>
             </div>
 
             <!-- Five day weather -->
             <div class="aside_five">
                 <ul class="five">
                     <li class="five__item">
-                        <i class="five__icon"><img id=first__icon></i>
                         <div class="five__data"><span id = first__data></span></div>
                         <div class="five__temperature"><span id = first__temperature></span><span> &#176 C</span></div>
+                        <i class="five__icon"><img id=first__icon></i>
                     </li>
                     <li class="five__item">
-                        <i class="five__icon"><img id=second__icon></i>
                         <div class="five__data"><span id=second__data></span></div>
                         <div class="five__temperature"><span id=second__temperature></span><span> &#176 C</span></div>
+                        <i class="five__icon"><img id=second__icon></i>
                     </li>
                     <li class="five__item">
-                        <i class="five__icon"><img id=third__icon></i>
                         <div class="five__data"><span id=third__data></div>
                         <div class="five__temperature"><span id=third__temperature></span><span> &#176 C</span></div>
+                        <i class="five__icon"><img id=third__icon></i>
                     </li>
                     <li class="five__item">
-                        <i class="five__icon"><img id=fourth__icon></i>
                         <div class="five__data"><span id=fourth__data></div>
                         <div class="five__temperature"><span id=fourth__temperature></span><span> &#176 C</span></div>
+                        <i class="five__icon"><img id=fourth__icon></i>
                     </li>
                 </ul>
             </div>
