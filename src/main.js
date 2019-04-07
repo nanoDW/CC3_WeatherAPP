@@ -276,7 +276,7 @@ function updateForecast(days) {
     console.log(days);
     //DATA 1
     let first__data = document.getElementById("first__data");
-    let firstData = days[0].date;
+    let firstData = moment(days[0].date).format('dddd, Do MMMM YYYY');
     first__data.innerText = ' ' + firstData;
     //TEMPERATURA 1
     let first__temperature = document.getElementById("first__temperature");
@@ -290,7 +290,7 @@ function updateForecast(days) {
 
     //DATA 2
     let second__data = document.getElementById("second__data");
-    let secondData = days[1].date;
+    let secondData = moment(days[1].date).format('dddd, Do MMMM YYYY');
     second__data.innerText = ' ' + secondData;
     //TEMPERATURA 2
     let second__temperature = document.getElementById("second__temperature");
@@ -304,7 +304,7 @@ function updateForecast(days) {
 
     //DATA 3
     let third__data = document.getElementById("third__data");
-    let thirdData = days[2].date;
+    let thirdData = moment(days[2].date).format('dddd, Do MMMM YYYY');
     third__data.innerText = ' ' + thirdData;
     //TEMPERATURA 3
     let third__temperature = document.getElementById("third__temperature");
@@ -318,7 +318,7 @@ function updateForecast(days) {
 
     //DATA 4
     let fourth__data = document.getElementById("fourth__data");
-    let fourthData = days[3].date;
+    let fourthData = moment(days[3].date).format('dddd, Do MMMM YYYY');
     fourth__data.innerText = ' ' + fourthData;
     //TEMPERATURA 4
     let fourth__temperature = document.getElementById("fourth__temperature");
@@ -331,7 +331,7 @@ function updateForecast(days) {
     }
 
 }
-//zrzynka z wes bosa
+//<----- Input box city suggestions ----->
 function findMatches(wordToMatch, cities) {
     const regexToMatch = new RegExp(wordToMatch, 'gi');
     return cities.filter(place => {
