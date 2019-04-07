@@ -32,54 +32,40 @@
                 <div id="header__date" class="header__date"></div>
             </header>
 
-            <div class="info__wrapper">
+            <!-- Weather Today Basic Info-->
+            <div id="basic" class="main__basic">
+                <p id="basic__description" class="basic__description"></p>
+                <i id="basic__icon" class="basic__icon"></i>
+                <div class="basic__temperature"><span id="basic__temperature"></span><span> &#176 C</span></div>
+            </div>
+            <div id="header__date" class="header__date"></div>
+        </header>
 
-                <!-- Weather Today Basic Info-->
-                <div id="basic" class="main__basic">
-                    <p id="basic__description" class="basic__description"></p>
-                    <i id="basic__icon" class="basic__icon"></i>
-                    <div class="basic__temperature"><span id="basic__temperature"></span><span> &#176 C</span></div>
-                </div>
-                
-        
-
-        <!-- Weather Today Basic Info--
-        <div id="basic" class="main__basic">
-            <p id="basic__description" class="basic__description"></p>
-            <i class="basic__icon"><img id="basic__icon"></i>
-            <div class="basic__temperature"><span id="basic__temperature"></span><span> &#176 C</span></div>
-        </div>-->
-
-                <!-- Weather Today Details-->
-                <div class="main__details">
-                    <ul class="details">
-                        <li class="details__item">
-                            <i class="details__icon"><img id="wind__icon" src="icons/wind.png" ></i>
-                            <div  class="details__description">Wind: <span id="wind__description"></span></div>
-                        </li>
-                        <li class="details__item">
-                            <i class="details__icon"><img id="presure__icon" src="icons/pressure.png" ></i>
-                            <div class="details__description">Pressure: <span id="pressure__description"></span></div>
-                        </li>
-                        <li class="details__item">
-                            <i class="details__icon"><img id="humidity__icon" src="icons/humidity.png"></i>
-                            <div class="details__description">Humidity: <span id="humidity__description"></span></div>
-                        </li>
+ 
+            <!-- Weather Today Details-->
+            <div class="main__details">
+                <ul class="details">
                     <li class="details__item">
-                            <i class="details__icon"><img id="precipitations__icon" src="icons/flood.png"></i>
-                            <div class="details__description">Precipitations: <span id="precipitations__description"></span>
-                            </div>
+                        <i class="details__icon"><img id="wind__icon" src="icons/wind.png" ></i>
+                        <div  class="details__description">Wind:<span id="wind__description"></span></div>
                     </li>
-                        <li class="details__item">
-                            <i class="details__icon"><img id="sunrise__icon" src="icons/sunrise.png"></i>
-                            <div class="details__description">Sunrise: </div>
-                        </li>
-                        <li class="details__item">
-                            <i class="details__icon"><img id="sunset__icon" src="icons/sunset.png"></i>
-                            <div class="details__description">Sunset: </div>
-                        </li>
-                    </ul>
-                </div>
+                    <li class="details__item">
+                        <i class="details__icon"><img id="presure__icon" src="icons/pressure.png" ></i>
+                        <div class="details__description">Pressure:<span id="pressure__description"></span></div>
+                    </li>
+                    <li class="details__item">
+                        <i class="details__icon"><img id="humidity__icon" src="icons/humidity.png"></i>
+                        <div class="details__description">Humidity:<span id="humidity__description"></span></div>
+                    </li>
+                    <li class="details__item">
+                        <i class="details__icon"><img id="sunrise__icon" src="icons/sunrise.png"></i>
+                        <div class="details__description">Sunrise:</div>
+                    </li>
+                    <li class="details__item">
+                        <i class="details__icon"><img id="sunset__icon" src="icons/sunset.png"></i>
+                        <div class="details__description">Sunset:</div>
+                    </li>
+                </ul>
             </div>
         </div>
 
@@ -88,13 +74,13 @@
 
             <!-- Settings -->
             <div class="aside__settings settings">
+                <i class="settings__icon"><img id ="settings__icon" src = "icons/settings.png"></i>
                 <ul class="settings__list">
                     <li class="settings__item"><a href="#">Change location</a></li>
                     <li class="settings__item"><a href="#">Favorites</a></li>
                     <li class="settings__item"><a href="#">Info</a></li>
                     <li class="settings__item"><a href="#">Settings</a></li>
                 </ul>
-                <i class="settings__icon"><img id ="settings__icon" src = "icons/settings.png"></i>
             </div>
 
             <!-- Five day weather -->
@@ -134,8 +120,10 @@
         <input type="submit" value="Submit">
     </form>
 
+    <!-- JS -->
+    <!-- <script src="main.js"></script> -->
 
-    <!-- credit to authors of icons-->
+    <!-- credit to authors of icons
     <div>Icons made by <a href="https://www.freepik.com/" title="Freepik">Freepik</a> from <a
             href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a
             href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a>
