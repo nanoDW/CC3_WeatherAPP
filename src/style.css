@@ -166,6 +166,8 @@ a {
     background-color: var(--prim-dark-bgcolor);
 }
 
+/*----------------------settings-------------------------*/
+
 .aside__settings {
     background-color: var(--second-dark-bgcolor);
     display: flex;
@@ -184,7 +186,31 @@ a {
 }
 
 
+/*--------------------five day weather------------------*/
 
 .five__item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
     border-top: solid 1px var(--prim-font-color);
+    padding: 1rem;
+}
+
+.five__wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.five__icon {
+    width: 25%;
+}
+.five__icon img {
+    width: 75%;
+    height: auto;
+}
+
+/*-----------------------------form-----------------------------------*/
+form {
+    display: inline-block;
 }
