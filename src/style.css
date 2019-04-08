@@ -25,9 +25,11 @@ body {
     line-height: 2rem;
 }
 
+
 .initial {
     display: none;
 }
+
 
 a {
     color: var(--prim-font-color);
@@ -282,6 +284,15 @@ input[type="submit"]:hover {
     background-color: var(--prim-dark-bgcolor);
 }
 
+/*----------------------------toggle visibility--------------------------------*/
+/*
+.toggle__content {
+    display: none;
+}
+
+.toggle__content.is__visible {
+    display: block;
+}
 
 /*----------------------------media queries--------------------------------*/
 

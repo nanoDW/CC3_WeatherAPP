@@ -158,6 +158,8 @@ class Today {
 
 // FETCHING
 async function fetchByCity(query) {
+    //toggleInitial();
+    //toggleLoading();
     try {
         // read current weather
         let weatherResponse = await fetch(`https://api.openweathermap.org/data/2.5/weather?${searchMethod}=${query}&units=${units}&APPID=${appId}`);
@@ -186,6 +188,8 @@ async function fetchByCity(query) {
 }
 
 async function fetchByCoordinates(lat, lon) {
+    //toggleInitial();
+    //toggleLoading();
     try {
         // read current weather
         let weatherResponse = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=${units}&APPID=${appId}`)
@@ -332,6 +336,9 @@ function updateForecast(days) {
     if (days[3].icon !== 0) {
         fourth__icon.src = 'icons/' + days[3].icon + '.png';
     }
+   
+    //toggleLoading();
+    //toggleMain();
 
 }
 //<----- Input box city suggestions ----->
@@ -359,3 +366,22 @@ function displayMatches() {
         suggestions.innerHTML = '';
     }
 }
+
+/*
+// toggle initial screen
+function toggleInitial() {
+    document.getElementById("initial").classList.toggle('is-visible');
+};
+
+// toggle loading screen
+function toggleLoading() {
+    document.getElementById("loading").classList.toggle('is-visible');
+ };
+ 
+
+ // toggle main page
+function toggleMain() {
+    document.getElementById("main").classList.toggle('is-visible');
+ };
+
+ */
