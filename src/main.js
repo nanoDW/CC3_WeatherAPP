@@ -400,6 +400,7 @@ function displayMatches() {
 
 function chooseCity(e){
     cityInput.firstElementChild.value = e.target.innerText;
+    suggestions.innerHTML = '';
 }
 //<----- Loading screen ----->
 
