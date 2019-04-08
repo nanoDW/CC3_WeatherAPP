@@ -1,6 +1,10 @@
 import './cssreset.css';
 import './style.css';
 import moment from 'moment-timezone';
+
+const loadingScreen = document.getElementById('loading');
+loading(true);
+
 const appId = '0ae6c1ab2f3771bcf82ab2f9738ba430';
 const apiKey = 'ZA9KO8TP5SVD';
 let units = 'metric'; // jeśli chcemy wyświetlać tez w Fahrenheitach
@@ -273,6 +277,7 @@ function updateDOM(currentWeather) {
     let humidityDescription = currentWeather.main.humidity;
     humidity__description.innerText = ' ' + humidityDescription + ' %';
 
+    loading(false);
 }
 
 // <----- Forecast----->
@@ -334,6 +339,7 @@ function updateForecast(days) {
         fourth__icon.src = 'icons/' + days[3].icon + '.png';
     }
 
+    loading(false);
 }
 //<----- Input box city suggestions ----->
 function findMatches(wordToMatch, cities) {
@@ -358,5 +364,17 @@ function displayMatches() {
 
     } else {
         suggestions.innerHTML = '';
+    }
+}
+
+function loading(setLoading) {
+    if (setLoading) {
+        loadingScreen.innerText = 'Loading...';
+        loadingScreen.style = 'width:100vw;height:200vh;position:absolute;display:block';
+        loadingScreen.style.backgroundColor = '#666';
+        loadingScreen.style.zIndex = '100';
+    } else {
+        loadingScreen.innerText = '';
+        loadingScreen.style = 'display:none'
     }
 }
