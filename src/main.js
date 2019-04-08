@@ -172,7 +172,7 @@ async function fetchByCity(query) {
         let zoneName = await findTimeZone(currentWeather.coord.lon, currentWeather.coord.lat);
         let today = new Today(currentWeather, zoneName);
         console.log(today);
-        updateDOM(currentWeather);
+        updateDOM(currentWeather, zoneName);
 
         // read forecast
         let forecastResponse = await fetch(`https://api.openweathermap.org/data/2.5/forecast?${searchMethod}=${query}&units=${units}&APPID=${appId}`);
@@ -200,7 +200,7 @@ async function fetchByCoordinates(lat, lon) {
         let zoneName = await findTimeZone(currentWeather.coord.lon, currentWeather.coord.lat);
         let today = new Today(currentWeather, zoneName);
         console.log(today);
-        updateDOM(currentWeather);
+        updateDOM(currentWeather, zoneName);
 
         // read forecast
         let forecastResponse = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=${units}&APPID=${appId}`)
@@ -237,8 +237,14 @@ function getCity(e) {
         fetchByCity(city);
     }
 }
+
+
 //Wrzutka pogody do HTML
-function updateDOM(currentWeather) {
+function updateDOM(currentWeather, zoneName) {
+    //<-----CITY----->
+     let city__name = document.getElementById("city__name");
+     let cityName = currentWeather.name;
+     city__name.innerText = ' ' + cityName;
 
     //<-----Weather Today Basic Info----->
     //OPIS
@@ -272,6 +278,16 @@ function updateDOM(currentWeather) {
     let humidity__description = document.getElementById("humidity__description");
     let humidityDescription = currentWeather.main.humidity;
     humidity__description.innerText = ' ' + humidityDescription + ' %';
+
+    //SUNRISE
+    let sunrise__description = document.getElementById("sunrise__description");
+    let sunriseDescription = moment(currentWeather.sys.sunrise * 1000).tz(zoneName).format('h:mm:ss');
+    sunrise__description.innerText = ' ' + sunriseDescription + ' am';
+
+    //SUNRISE
+    let sunset__description = document.getElementById("sunset__description");
+    let sunsetDescription = moment(currentWeather.sys.sunset * 1000).tz(zoneName).format('h:mm:ss');
+    sunset__description.innerText = ' ' + sunsetDescription + ' pm';
 
 }
 
