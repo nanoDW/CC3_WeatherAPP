@@ -2,12 +2,15 @@
 
 :root {
     --prim-dark-bgcolor: #247BA0;
+    --prim-ultradark-bgcolor: #164A61;
     --second-light-bgcolor: #FFE066;
     --second-dark-bgcolor: #9E8C43;
     --prim-font-color: #fff;
     --second-font-color: #909090;
     --prim-font-family: 'Roboto', 'Arial', sans-serif;
     --second-font-family: 'Roboto Condensed', 'Arial', sans-serif;
+    --prim-line-color:#97CFE8;
+    --second-line-color: #CFC6A1;
 }
 
 * {
@@ -205,7 +208,7 @@ a {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    border-top: solid 1px var(--prim-font-color);
+    border-bottom: solid 1px var(--prim-line-color);
     padding: 1rem;
 }
 
@@ -224,8 +227,59 @@ a {
 }
 
 /*-----------------------------form-----------------------------------*/
+
 form {
-    display: inline-block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    text-align: right;
+    z-index: 999;
+}
+
+form input {
+    width: 250px;
+    margin: 0;
+    padding: 0.5rem;
+    border: 0;
+    border-left: solid 1px var(--second-line-color);
+    font-family: var(--prim-font-family);
+    font-size: 1.2rem;
+    line-height: 2rem;
+}
+
+input[type="text"] {
+    color: var(--second-font-color);
+}
+
+input[type="submit"] {
+    background: var(--second-dark-bgcolor);
+    border-bottom: solid 1px var(--second-line-color);
+    color: var(--prim-font-color);
+    font-weight: bold;
+    text-align: center;
+}
+
+input[type="submit"]:hover {
+    background: var(--prim-ultradark-bgcolor);
+    color: var(--prim-line-color);
+}
+
+.suggestions {
+    background-color: var(--second-dark-bgcolor);
+}
+
+.suggestions li {
+    border-left: solid 1px var(--second-line-color);
+    border-bottom: solid 1px var(--second-line-color);
+    padding: 0.5rem;
+}
+
+.suggestions li:first-child {
+    border-top: solid 1px var(--second-line-color);
+}
+
+.suggestions li:hover {
+    background-color: var(--prim-dark-bgcolor);
 }
 
 
