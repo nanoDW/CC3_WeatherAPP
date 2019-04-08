@@ -390,6 +390,13 @@ function displayMatches() {
         suggestions.innerHTML = '';
     }
 }
+//<----- Loading screen ----->
+
+    window.addEventListener("load", function(){
+        let loading = document.getElementById("loading");
+        document.body.removeChild(loading);
+    })
+
 
 /*
 // toggle initial screen
