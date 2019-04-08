@@ -34,7 +34,7 @@ a {
     height: 100vh;
     display: flex;
     flex-direction: row;
-    align-items: flex-start;
+    align-items: stretch;
 }
 
 .today__wrapper {
@@ -42,15 +42,15 @@ a {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    
+        
 }
 
 .weather__wrapper {
     width: 100%;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    align-items: stretch;
+    justify-content: space-around;
+    
 }
 
 
@@ -80,19 +80,24 @@ a {
 
 .main__basic {
     width: 50%;
+    padding-bottom: 30%;
     flex-grow: 1;
-    padding: 4rem;
+    align-self: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    
         
 }
 
+.basic__icon {
+    margin: 0 2rem;
+}
 
-/*.main header,
-.main div,
-.main aside {
-    width: 90%;
-    margin: 0 auto;
-
-}*/
+.basic__icon img {
+    height: 170px;
+    width: auto;
+}
 
 .basic__description {
     font-size: 3rem;
@@ -114,15 +119,19 @@ a {
 /*----------------------------details-----------------------*/
 
 .main__details { 
-    width: 50%;
+    
     flex-grow: 1;
-    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding-bottom: 5%;
+    padding-left: 2rem;
+    
 }
 
 .details {
-    position: relative;
-    top: 50%;
-    left: 3rem;
+    
+    margin-left: 3rem;
 }
 
 .details__item {
