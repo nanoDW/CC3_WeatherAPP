@@ -6,6 +6,10 @@ const apiKey = 'ZA9KO8TP5SVD';
 let units = 'metric'; // jeśli chcemy wyświetlać tez w Fahrenheitach
 let searchMethod = 'q'; // jeśli chcemy umozliwić wyszukiwanie po czymś innym niz nazwa miasta
 
+//Language of date (days,months). change to 'en' for english
+let momentLang = 'en';
+moment.locale(momentLang);
+
 // Geolocation
 navigator.geolocation.getCurrentPosition(geoSuccess, geoDenied);
 
@@ -146,6 +150,7 @@ class Today {
             this.TempMin = currentWeather.main.temp_min,
             this.Sunrise = moment(currentWeather.sys.sunrise * 1000).tz(zoneName).format(),
             this.Sunset = moment(currentWeather.sys.sunset * 1000).tz(zoneName).format(),
+            this.CityDate = moment(currentWeather.dt * 1000).tz(zoneName).format(),
             this.currDescription = currentWeather.weather[0].description,
             this.Id = currentWeather.weather[0].id,
             this.Main = currentWeather.weather[0].main,
@@ -170,7 +175,7 @@ async function fetchByCity(query) {
         let zoneName = await findTimeZone(currentWeather.coord.lon, currentWeather.coord.lat);
         let today = new Today(currentWeather, zoneName);
         console.log(today);
-        updateDOM(currentWeather);
+        updateDOM(currentWeather, zoneName);
 
         // read forecast
         let forecastResponse = await fetch(`https://api.openweathermap.org/data/2.5/forecast?${searchMethod}=${query}&units=${units}&APPID=${appId}`);
@@ -200,7 +205,7 @@ async function fetchByCoordinates(lat, lon) {
         let zoneName = await findTimeZone(currentWeather.coord.lon, currentWeather.coord.lat);
         let today = new Today(currentWeather, zoneName);
         console.log(today);
-        updateDOM(currentWeather);
+        updateDOM(currentWeather, zoneName);
 
         // read forecast
         let forecastResponse = await fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=${units}&APPID=${appId}`)
@@ -237,11 +242,20 @@ function getCity(e) {
         fetchByCity(city);
     }
 }
-//Wrzutka pogody do HTML
-function updateDOM(currentWeather) {
 
-    // Input reset
-    cityInput.reset();
+
+//Wrzutka pogody do HTML
+function updateDOM(currentWeather, zoneName) {
+    //<-----HEADER----->
+    //CITY
+     let city__name = document.getElementById("city__name");
+     let cityName = currentWeather.name;
+     city__name.innerText = ' ' + cityName;
+
+     //DATE
+     let header__date = document.getElementById("header__date");
+     let headerDate = moment(currentWeather.dt * 1000).tz(zoneName).format('dddd, Do MMMM YYYY, h:mm');
+     header__date.innerText = ' ' + headerDate;
 
     //<-----Weather Today Basic Info----->
     //OPIS
@@ -251,7 +265,7 @@ function updateDOM(currentWeather) {
 
     //TEMPERATURA
     let basic__temperature = document.getElementById("basic__temperature");
-    let basicTemperature = currentWeather.main.temp;
+    let basicTemperature = Math.floor(currentWeather.main.temp);
     basic__temperature.innerText = ' ' + basicTemperature;
 
     //IKONA
@@ -276,6 +290,16 @@ function updateDOM(currentWeather) {
     let humidityDescription = currentWeather.main.humidity;
     humidity__description.innerText = ' ' + humidityDescription + ' %';
 
+    //SUNRISE
+    let sunrise__description = document.getElementById("sunrise__description");
+    let sunriseDescription = moment(currentWeather.sys.sunrise * 1000).tz(zoneName).format('h:mm');
+    sunrise__description.innerText = ' ' + sunriseDescription + ' am';
+
+    //SUNRISE
+    let sunset__description = document.getElementById("sunset__description");
+    let sunsetDescription = moment(currentWeather.sys.sunset * 1000).tz(zoneName).format('h:mm');
+    sunset__description.innerText = ' ' + sunsetDescription + ' pm';
+
 }
 
 // <----- Forecast----->
@@ -287,7 +311,7 @@ function updateForecast(days) {
     first__data.innerText = ' ' + firstData;
     //TEMPERATURA 1
     let first__temperature = document.getElementById("first__temperature");
-    let firstTemperature = days[0].maxTemp;
+    let firstTemperature = Math.floor(days[0].maxTemp);
     first__temperature.innerText = ' ' + firstTemperature;
     //IKONA 1
     let first__icon = document.getElementById("first__icon");
@@ -301,7 +325,7 @@ function updateForecast(days) {
     second__data.innerText = ' ' + secondData;
     //TEMPERATURA 2
     let second__temperature = document.getElementById("second__temperature");
-    let secondTemperature = days[1].maxTemp;
+    let secondTemperature = Math.floor(days[1].maxTemp);
     second__temperature.innerText = ' ' + secondTemperature;
     //IKONA 2
     let second__icon = document.getElementById("second__icon");
@@ -315,7 +339,7 @@ function updateForecast(days) {
     third__data.innerText = ' ' + thirdData;
     //TEMPERATURA 3
     let third__temperature = document.getElementById("third__temperature");
-    let thirdTemperature = days[2].maxTemp;
+    let thirdTemperature = Math.floor(days[2].maxTemp);
     third__temperature.innerText = ' ' + thirdTemperature;
     //IKONA 3
     let third__icon = document.getElementById("third__icon");
@@ -329,7 +353,7 @@ function updateForecast(days) {
     fourth__data.innerText = ' ' + fourthData;
     //TEMPERATURA 4
     let fourth__temperature = document.getElementById("fourth__temperature");
-    let fourthTemperature = days[3].maxTemp;
+    let fourthTemperature = Math.floor(days[3].maxTemp);
     fourth__temperature.innerText = ' ' + fourthTemperature;
     //IKONA 4
     let fourth__icon = document.getElementById("fourth__icon");
