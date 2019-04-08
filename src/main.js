@@ -250,7 +250,7 @@ function updateDOM(currentWeather, zoneName) {
 
      //DATE
      let header__date = document.getElementById("header__date");
-     let headerDate = moment(currentWeather.dt * 1000).tz(zoneName).format('dddd, Do MMMM YYYY');
+     let headerDate = moment(currentWeather.dt * 1000).tz(zoneName).format('dddd, Do MMMM YYYY, h:mm');
      header__date.innerText = ' ' + headerDate;
 
     //<-----Weather Today Basic Info----->
@@ -261,7 +261,7 @@ function updateDOM(currentWeather, zoneName) {
 
     //TEMPERATURA
     let basic__temperature = document.getElementById("basic__temperature");
-    let basicTemperature = currentWeather.main.temp;
+    let basicTemperature = Math.floor(currentWeather.main.temp);
     basic__temperature.innerText = ' ' + basicTemperature;
 
     //IKONA
@@ -307,7 +307,7 @@ function updateForecast(days) {
     first__data.innerText = ' ' + firstData;
     //TEMPERATURA 1
     let first__temperature = document.getElementById("first__temperature");
-    let firstTemperature = days[0].maxTemp;
+    let firstTemperature = Math.floor(days[0].maxTemp);
     first__temperature.innerText = ' ' + firstTemperature;
     //IKONA 1
     let first__icon = document.getElementById("first__icon");
@@ -321,7 +321,7 @@ function updateForecast(days) {
     second__data.innerText = ' ' + secondData;
     //TEMPERATURA 2
     let second__temperature = document.getElementById("second__temperature");
-    let secondTemperature = days[1].maxTemp;
+    let secondTemperature = Math.floor(days[1].maxTemp);
     second__temperature.innerText = ' ' + secondTemperature;
     //IKONA 2
     let second__icon = document.getElementById("second__icon");
@@ -335,7 +335,7 @@ function updateForecast(days) {
     third__data.innerText = ' ' + thirdData;
     //TEMPERATURA 3
     let third__temperature = document.getElementById("third__temperature");
-    let thirdTemperature = days[2].maxTemp;
+    let thirdTemperature = Math.floor(days[2].maxTemp);
     third__temperature.innerText = ' ' + thirdTemperature;
     //IKONA 3
     let third__icon = document.getElementById("third__icon");
@@ -349,7 +349,7 @@ function updateForecast(days) {
     fourth__data.innerText = ' ' + fourthData;
     //TEMPERATURA 4
     let fourth__temperature = document.getElementById("fourth__temperature");
-    let fourthTemperature = days[3].maxTemp;
+    let fourthTemperature = Math.floor(days[3].maxTemp);
     fourth__temperature.innerText = ' ' + fourthTemperature;
     //IKONA 4
     let fourth__icon = document.getElementById("fourth__icon");
