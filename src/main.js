@@ -50,7 +50,7 @@ cityInput.addEventListener('keyup', displayMatches);
 
 async function findTimeZone(lng, lat) {
     try {
-        let timeZoneResponse = await fetch(`http://api.timezonedb.com/v2.1/get-time-zone?key=${apiKey}&format=json&by=position&lng=${lng}&lat=${lat}`);
+        let timeZoneResponse = await fetch(`https://api.timezonedb.com/v2.1/get-time-zone?key=${apiKey}&format=json&by=position&lng=${lng}&lat=${lat}`);
         if (!timeZoneResponse.ok) {
             throw new Error();
         }
