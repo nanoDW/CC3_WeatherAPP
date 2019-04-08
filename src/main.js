@@ -6,9 +6,9 @@ const apiKey = 'ZA9KO8TP5SVD';
 let units = 'metric'; // jeśli chcemy wyświetlać tez w Fahrenheitach
 let searchMethod = 'q'; // jeśli chcemy umozliwić wyszukiwanie po czymś innym niz nazwa miasta
 
-//Language of date (days,months). change to 'en' for english
-let momentLang = 'en';
-moment.locale(momentLang);
+const loadingScreen = document.getElementById('loading');
+
+loading(true);
 
 // Geolocation
 navigator.geolocation.getCurrentPosition(geoSuccess, geoDenied);
@@ -26,6 +26,7 @@ function geoDenied() {
     if (localStorage.city) {
         fetchByCity(localStorage.city);
     }
+    loading(false);
 }
 
 const cityInput = document.getElementById('cityInput');
@@ -184,7 +185,7 @@ async function fetchByCity(query) {
         }
         let forecast = await forecastResponse.json();
         convertTimeZone(forecast, zoneName);
-        
+
     } catch(err) {
 
         console.log(err.message);
@@ -238,6 +239,7 @@ function getCity(e) {
     }
 
     if (city) {
+        loading(true);
         localStorage.setItem('city', city);
         fetchByCity(city);
     }
@@ -299,7 +301,6 @@ function updateDOM(currentWeather, zoneName) {
     let sunset__description = document.getElementById("sunset__description");
     let sunsetDescription = moment(currentWeather.sys.sunset * 1000).tz(zoneName).format('h:mm');
     sunset__description.innerText = ' ' + sunsetDescription + ' pm';
-
 }
 
 // <----- Forecast----->
@@ -364,6 +365,8 @@ function updateForecast(days) {
     //toggleLoading();
     //toggleMain();
 
+    loading(false);
+
 }
 //<----- Input box city suggestions ----->
 function findMatches(wordToMatch, cities) {
@@ -392,11 +395,18 @@ function displayMatches() {
 }
 //<----- Loading screen ----->
 
-    window.addEventListener("load", function(){
+    /*window.addEventListener("load", function(){
         let loading = document.getElementById("loading");
         document.body.removeChild(loading);
-    })
+    })*/
 
+function loading(setLoading) {
+    if (setLoading) {
+        loadingScreen.style.display = 'block';
+    } else {
+        loadingScreen.style.display = 'none';
+    }
+}
 
 /*
 // toggle initial screen
