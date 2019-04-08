@@ -389,9 +389,17 @@ function displayMatches() {
 
         suggestions.innerHTML = html;
 
+       suggestions.addEventListener('click', chooseCity);
+
     } else {
         suggestions.innerHTML = '';
+
+        suggestions.removeEventListener('click', chooseCity);
     }
+}
+
+function chooseCity(e){
+    cityInput.firstElementChild.value = e.target.innerText;
 }
 //<----- Loading screen ----->
 
