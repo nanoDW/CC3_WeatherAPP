@@ -6,6 +6,10 @@ const apiKey = 'ZA9KO8TP5SVD';
 let units = 'metric'; // jeśli chcemy wyświetlać tez w Fahrenheitach
 let searchMethod = 'q'; // jeśli chcemy umozliwić wyszukiwanie po czymś innym niz nazwa miasta
 
+//Language of date (days,months). change to 'en' for english
+let momentLang = 'en';
+moment.locale(momentLang);
+
 // Geolocation
 navigator.geolocation.getCurrentPosition(geoSuccess, geoDenied);
 
@@ -146,6 +150,7 @@ class Today {
             this.TempMin = currentWeather.main.temp_min,
             this.Sunrise = moment(currentWeather.sys.sunrise * 1000).tz(zoneName).format(),
             this.Sunset = moment(currentWeather.sys.sunset * 1000).tz(zoneName).format(),
+            this.CityDate = moment(currentWeather.dt * 1000).tz(zoneName).format(),
             this.currDescription = currentWeather.weather[0].description,
             this.Id = currentWeather.weather[0].id,
             this.Main = currentWeather.weather[0].main,
@@ -237,13 +242,16 @@ function getCity(e) {
 
 //Wrzutka pogody do HTML
 function updateDOM(currentWeather, zoneName) {
-    //<-----CITY----->
+    //<-----HEADER----->
+    //CITY
      let city__name = document.getElementById("city__name");
      let cityName = currentWeather.name;
      city__name.innerText = ' ' + cityName;
 
-    // Input reset
-    cityInput.reset();
+     //DATE
+     let header__date = document.getElementById("header__date");
+     let headerDate = moment(currentWeather.dt * 1000).tz(zoneName).format('dddd, Do MMMM YYYY');
+     header__date.innerText = ' ' + headerDate;
 
     //<-----Weather Today Basic Info----->
     //OPIS
@@ -280,12 +288,12 @@ function updateDOM(currentWeather, zoneName) {
 
     //SUNRISE
     let sunrise__description = document.getElementById("sunrise__description");
-    let sunriseDescription = moment(currentWeather.sys.sunrise * 1000).tz(zoneName).format('h:mm:ss');
+    let sunriseDescription = moment(currentWeather.sys.sunrise * 1000).tz(zoneName).format('h:mm');
     sunrise__description.innerText = ' ' + sunriseDescription + ' am';
 
     //SUNRISE
     let sunset__description = document.getElementById("sunset__description");
-    let sunsetDescription = moment(currentWeather.sys.sunset * 1000).tz(zoneName).format('h:mm:ss');
+    let sunsetDescription = moment(currentWeather.sys.sunset * 1000).tz(zoneName).format('h:mm');
     sunset__description.innerText = ' ' + sunsetDescription + ' pm';
 
 }
