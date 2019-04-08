@@ -10,6 +10,10 @@
     --second-font-family: 'Roboto Condensed', 'Arial', sans-serif;
 }
 
+* {
+    box-sizing: border-box;
+}
+
 body {
     background-image: linear-gradient(to right, var(--second-dark-bgcolor), var(--prim-dark-bgcolor));
     font-family: var(--prim-font-family);
@@ -148,10 +152,6 @@ a {
     
 }
 
-.details__icon {
-        
-}
-
 .details__description {
     line-height: 43.5px;
     margin: 0 1rem;
@@ -161,15 +161,13 @@ a {
 
 .main__aside {
     width: 30%;
-    min-width: 300px;
+    min-width: 355px;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: stretch;
     background-color: var(--prim-dark-bgcolor);
 }
-
-.main__aside > div {}
 
 .main__aside>div a:hover {
     background-color: var(--prim-dark-bgcolor);
@@ -233,14 +231,56 @@ form {
 
 /*----------------------------media queries--------------------------------*/
 
-@media (max-width: 1150px) {
 
+@media (max-width: 1290px) {
+
+    .today__wrapper {
+        justify-content: flex-start;
+    }
+
+    .weather__wrapper {
+        flex-direction: column;
+        justify-content: space-around;
+        
+    }
+
+    
+    .main__details,
+    .main__basic {
+        width: 100%;
+        justify-content: center;
+        padding: 0.5rem;
+    }
+
+    .basic__icon {
+        margin: 0 0 0 1rem;
+    }
+
+    .temperature__wrapper {
+        margin: 0 1rem;
+    }
+
+    .main__details {
+        margin-top: 4rem;
+    }
+
+    .details {
+        width: 100%;
+        margin: 0;
+        text-align: center;
+    }
+
+    .details__item {
+        display: inline;
+        width: 50%;
+        
+    }
 
 }
 
 
 
-@media (max-width: 1000px) {
+@media (max-width: 900px) {
 
 }
 
