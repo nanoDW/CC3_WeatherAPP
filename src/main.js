@@ -9,6 +9,7 @@ let searchMethod = 'q';
 const loadingScreen = document.getElementById('loading');
 
 loading(true);
+document.getElementById('hideHtmlFlash').remove();
 
 // Geolocation
 navigator.geolocation.getCurrentPosition(geoSuccess, geoDenied);
