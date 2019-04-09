@@ -234,7 +234,7 @@ async function fetchByCoordinates(lat, lon) {
         console.log(err.message);
         alert("Couldn't find your location.");
         loading(false);
-        
+        document.getElementById("initial").style.display = "flex";
     }
 }
 
