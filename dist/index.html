@@ -90,11 +90,11 @@
                 </div>
             </div>
             <!-- form do wrzucenia w opowiednie miejsce w htmlu-->
-            <form id="cityInput">
+            <!----<form id="cityInput">
                 <input type="text" placeholder="City">
                 <ul class="suggestions"></ul>
                 <input type="submit" value="Submit">
-            </form>
+            </form>-->
         </div>
 
         <!-- Aside-->
@@ -104,6 +104,16 @@
             <div class="aside__settings settings">
                 <ul class="settings__list">
                     <li class="settings__item"><a href="#">Change location</a></li>
+                    <li class="settings__item">
+                        <!-- form do wrzucenia w opowiednie miejsce w htmlu-->
+                        <form id="cityInput">
+                            <input type="text" placeholder="City">
+                            <ul class="suggestions"></ul>
+                            <input type="submit" value="Submit">
+                        </form>
+                    </li>
+                    <li class="settings__item settings__input"><input type="text" placeholder="City"></li>
+                    <li class="settings__item settings__submit"><input type="submit" value="Submit"></li>
                     <li class="settings__item"><a href="#">Favorites</a></li>
                     <li class="settings__item"><a href="#">Info</a></li>
                     <li class="settings__item"><a href="#">Settings</a></li>

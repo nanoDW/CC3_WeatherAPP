@@ -239,6 +239,11 @@ a {
 
 /*-----------------------------form-----------------------------------*/
 
+.settings__input,
+.settings__submit {
+    display: none;
+}
+
 form {
     position: absolute;
     top: 0;
@@ -598,11 +603,26 @@ input[type="submit"]:hover {
     }
     
     .aside__settings {
-        display:none; /*to switch*/
+        display: flex; /*to switch*/
     }
+    .aside_five {
+        display: none; /*to switch*/
+    }
+
+    .settings__item {
+        font-size: 1rem;
+        line-height: 2rem;
+        width: 100%;
+        border-bottom: 1px solid var(--second-line-color);
+    }
+
     .settings__icon img {
         width: auto;
         height: 70%;
+    }
+
+    form {
+        position: relative;
     }
 }
 
