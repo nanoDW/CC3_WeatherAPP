@@ -283,6 +283,7 @@ input[type="submit"]:hover {
 
 .suggestions li:hover {
     background-color: var(--prim-dark-bgcolor);
+    cursor: pointer;
 }
 
 /*----------------------------toggle visibility--------------------------------*/
@@ -421,6 +422,10 @@ input[type="submit"]:hover {
 
 @media (max-width: 900px) {
 
+    form {
+        display: none;
+    }
+
     body {
         background-image: linear-gradient(to bottom, var(--second-dark-bgcolor), var(--prim-dark-bgcolor));
         font-size: 0.8rem;
@@ -538,7 +543,37 @@ input[type="submit"]:hover {
 
 
 
-@media (max-width: 400px) {
+@media (max-width: 430px) {
 
+    .weather__wrapper {
+        flex-direction: column;
+    }
+    .main__basic,
+    .main__details {
+        width: 100%;
+    }
+    .main__details {
+        align-items: flex-end;
+    }
+    .details__item {
+        display: inline-block;
+    }
 
+    .main__aside {
+        min-width: auto;
+    }
+    .five__data {
+        line-height: 1rem;
+    }
+    .five__item {
+        
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .five__wrapper {
+        width: auto;
+        flex-direction: column;
+        justify-content: space-around;
+    }
 }
