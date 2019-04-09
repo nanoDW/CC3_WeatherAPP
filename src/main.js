@@ -34,8 +34,8 @@ function geoDenied() {
 }
 
 const cityInput = document.getElementById('cityInput');
-const initialInput = document.getElementById('initial__cityinput');
-const suggestions = document.querySelector('.suggestions');
+const initialInput = document.getElementById('initialCityinput');
+let suggestions;
 
 let city = '';
 
@@ -202,6 +202,7 @@ async function fetchByCity(query) {
         cityInput.reset();
         localStorage.clear();
         loading(false);
+        document.getElementById("initial").style.display = "flex";
     }
 
 }
@@ -239,30 +240,6 @@ async function fetchByCoordinates(lat, lon) {
 
 
 // THE END OF FETCHING
-
-function getCity(e) {
-    e.preventDefault();
-
-    //list of special chars that we dont want in our string
-    const regex = /(--)|[!$%^&*()_+|~=`{}\[\]:\/;<>?,.@#]/;
-
-    let city = e.target[0].value.toLowerCase().trim();
-
-    if (!city) {
-        console.log('FormField is empty');
-    } else if (city.match(regex) || city.match(/[0-9]/) && city.match(/[a-z]/)) {
-        console.log('Input contains invalid characters')
-        city = '';
-    }
-
-    if (city) {
-        hideInital();
-        loading(true);
-        localStorage.setItem('city', city);
-        fetchByCity(city);
-    }
-}
-
 
 //Wrzutka pogody do HTML
 function updateDOM(currentWeather, zoneName) {
@@ -386,7 +363,32 @@ function updateForecast(days) {
     loading(false);
 
 }
+
+function getCity(e) {
+    e.preventDefault();
+
+    //list of special chars that we dont want in our string
+    const regex = /(--)|[!$%^&*()_+|~=`{}\[\]:\/;<>?,.@#]/;
+
+    let city = e.target[0].value.toLowerCase().trim();
+
+    if (!city) {
+        console.log('FormField is empty');
+    } else if (city.match(regex) || city.match(/[0-9]/) && city.match(/[a-z]/)) {
+        console.log('Input contains invalid characters')
+        city = '';
+    }
+
+    if (city) {
+        hideInital();
+        loading(true);
+        localStorage.setItem('city', city);
+        fetchByCity(city);
+    }
+}
+
 //<----- Input box city suggestions ----->
+
 function findMatches(wordToMatch, cities) {
     const regexToMatch = new RegExp(wordToMatch, 'gi');
     return cities.filter(place => {
@@ -396,6 +398,8 @@ function findMatches(wordToMatch, cities) {
 
 function displayMatches() {
     const cityName = this[0].value;
+
+    suggestions = this.childNodes[3];
 
     if (cityName.length >= 3) {
         const matchArray = findMatches(cityName, cities);
@@ -418,8 +422,9 @@ function hideMatches() {
     suggestions.removeEventListener('click', chooseCity);
 }
 
-function chooseCity(e){
+function chooseCity(e, inputBox){
     cityInput.firstElementChild.value = e.target.innerText;
+    initialInput.firstElementChild.value = e.target.innerText;
     hideMatches();
 }
 //<----- Loading screen ----->

@@ -239,7 +239,7 @@ a {
 
 /*-----------------------------form-----------------------------------*/
 
-form {
+#cityInput {
     position: absolute;
     top: 0;
     right: 0;
@@ -247,7 +247,7 @@ form {
     z-index: 999;
 }
 
-form input {
+#cityInput input {
     width: 250px;
     margin: 0;
     padding: 0.5rem;
