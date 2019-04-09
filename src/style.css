@@ -239,16 +239,16 @@ a {
 
 /*-----------------------------form-----------------------------------*/
 
-<<<<<<< HEAD
-#cityInput {
-=======
 .settings__input,
 .settings__submit {
     display: none;
 }
 
-form {
->>>>>>> css-dev
+input:focus {
+    background-color: var(--second-light-bgcolor);
+}
+
+#cityInput {
     position: absolute;
     top: 0;
     right: 0;
@@ -267,11 +267,11 @@ form {
     line-height: 2rem;
 }
 
-input[type="text"] {
+.city__input {
     color: var(--second-font-color);
 }
 
-input[type="submit"] {
+.city__submit {
     background: var(--second-dark-bgcolor);
     border-bottom: solid 1px var(--second-line-color);
     color: var(--prim-font-color);
@@ -279,7 +279,7 @@ input[type="submit"] {
     text-align: center;
 }
 
-input[type="submit"]:hover {
+.city__submit:hover {
     background: var(--prim-ultradark-bgcolor);
     color: var(--prim-line-color);
 }
@@ -304,6 +304,11 @@ input[type="submit"]:hover {
 }
 
 /*----------------------------initial screen--------------------------------*/
+#initialCityinput {
+    width: 100%;
+    text-align: center;
+}
+
 .initial {
     display: flex;
     justify-content: center;
@@ -318,6 +323,7 @@ input[type="submit"]:hover {
 }
 
 .initial__screen {
+    width: 100%;
     max-width: 1000px;
     display: flex;
     justify-content: center;
@@ -325,7 +331,7 @@ input[type="submit"]:hover {
     flex-direction: column;
     font-size: 1.8rem;
     line-height: 2rem;
-    padding: 0.5rem;
+    padding: 0;
 }
 
 .initial__location {
@@ -333,21 +339,22 @@ input[type="submit"]:hover {
 }
 
 .initial__cityinput {
-    width: 350px;
+    width: 100%;
+    max-width: 450px;
     margin: 0;
     border: 0;
     font-size: 1.2rem;
     line-height: 2rem;
     text-align: center;
     padding: 0.5rem;
-    border-left: solid 1px var(--second-line-color);
     font-family: var(--prim-font-family);
 }
 
 .initial__button {
-    width: 350px;
-    background: var(--second-dark-bgcolor);
-    border-bottom: solid 1px var(--second-line-color);
+    width: 100%;
+    max-width: 450px;
+    background: var(--prim-dark-bgcolor);
+    border: 0;
     color: var(--prim-font-color);
     font-weight: bold;
     text-align: center;
@@ -488,10 +495,6 @@ input[type="submit"]:hover {
 
 @media (max-width: 900px) {
 
-    form {
-        display: none;
-    }
-
     body {
         background-image: linear-gradient(to bottom, var(--second-dark-bgcolor), var(--prim-dark-bgcolor));
         font-size: 0.8rem;
@@ -627,6 +630,10 @@ input[type="submit"]:hover {
 
     form {
         position: relative;
+    }
+
+    .city__input {
+        display: none;
     }
 }
 
