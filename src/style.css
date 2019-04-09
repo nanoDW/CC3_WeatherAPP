@@ -304,6 +304,23 @@ input:focus {
 }
 
 /*----------------------------initial screen--------------------------------*/
+
+h1 {
+    font-family: var(--second-font-family);
+    font-weight: bold;
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.initial__icon {
+    text-align: center;
+}
+
+.initial__icon img {
+    width: 40%;
+    height: auto;
+}
+
 #initialCityinput {
     width: 100%;
     text-align: center;
@@ -640,6 +657,10 @@ input:focus {
 
 
 @media (max-width: 430px) {
+
+    h1 {
+        font-size: 2rem;
+    }
 
     .weather__wrapper {
         flex-direction: column;
