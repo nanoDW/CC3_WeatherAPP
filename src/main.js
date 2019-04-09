@@ -401,21 +401,19 @@ function displayMatches() {
         suggestions.innerHTML = html;
 
        suggestions.addEventListener('click', chooseCity);
-
     } else {
         hideMatches();
-
-        suggestions.removeEventListener('click', chooseCity);
     }
 }
 
 function hideMatches() {
     suggestions.innerHTML = '';
+    suggestions.removeEventListener('click', chooseCity);
 }
 
 function chooseCity(e){
     cityInput.firstElementChild.value = e.target.innerText;
-    suggestions.innerHTML = '';
+    hideMatches();
 }
 //<----- Loading screen ----->
 
@@ -425,11 +423,7 @@ function chooseCity(e){
     })*/
 
 function loading(setLoading) {
-    if (setLoading) {
-        loadingScreen.style.display = 'block';
-    } else {
-        loadingScreen.style.display = 'none';
-    }
+    (setLoading ? loadingScreen.style.display = 'block' : loadingScreen.style.display = 'none');
 }
 
 /*
