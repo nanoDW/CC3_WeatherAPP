@@ -19,18 +19,22 @@ function geoSuccess(position) {
     let lat = position.coords.latitude;
     let lon = position.coords.longitude;
     fetchByCoordinates(lat, lon);
+    hideInital();
 }
 // Jak ktoś odmówi - w takim przypadku chyba nic nie robimy i czekamy na input?
 function geoDenied() {
     console.log('Geolocation denied');
     // local storage
     if (localStorage.city) {
+        hideInital();
+        loading(true);
         fetchByCity(localStorage.city);
     }
     loading(false);
 }
 
 const cityInput = document.getElementById('cityInput');
+const initialInput = document.getElementById('initial__cityinput');
 const suggestions = document.querySelector('.suggestions');
 
 let city = '';
@@ -46,6 +50,10 @@ const cities = [];
 cityInput.addEventListener('submit', getCity);
 cityInput.addEventListener('change', displayMatches);
 cityInput.addEventListener('keyup', displayMatches);
+
+initialInput.addEventListener('submit', getCity);
+initialInput.addEventListener('change', displayMatches);
+initialInput.addEventListener('keyup', displayMatches);
 
 
 // FINDING THE RIGHT DATA FOR THE FORECAST
@@ -248,6 +256,7 @@ function getCity(e) {
     }
 
     if (city) {
+        hideInital();
         loading(true);
         localStorage.setItem('city', city);
         fetchByCity(city);
@@ -373,8 +382,6 @@ function updateForecast(days) {
         fourth__icon.src = 'icons/' + days[3].icon + '.png';
     }
    
-    //toggleLoading();
-    //toggleMain();
 
     loading(false);
 
@@ -426,21 +433,10 @@ function loading(setLoading) {
     (setLoading ? loadingScreen.style.display = 'block' : loadingScreen.style.display = 'none');
 }
 
-/*
-// toggle initial screen
-function toggleInitial() {
-    document.getElementById("initial").classList.toggle('is-visible');
+
+// hide initial screen
+function hideInital() {
+    document.getElementById("initial").style.display = "none";
 };
 
-// toggle loading screen
-function toggleLoading() {
-    document.getElementById("loading").classList.toggle('is-visible');
- };
  
-
- // toggle main page
-function toggleMain() {
-    document.getElementById("main").classList.toggle('is-visible');
- };
-
- */

@@ -26,10 +26,6 @@ body {
 }
 
 
-.initial {
-    display: none;
-}
-
 
 a {
     color: var(--prim-font-color);
@@ -285,15 +281,64 @@ input[type="submit"]:hover {
     background-color: var(--prim-dark-bgcolor);
 }
 
-/*----------------------------toggle visibility--------------------------------*/
-/*
-.toggle__content {
-    display: none;
+/*----------------------------initial screen--------------------------------*/
+.initial {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(to right, var(--second-dark-bgcolor), var(--prim-dark-bgcolor));
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2000;
 }
 
-.toggle__content.is__visible {
-    display: block;
+.initial__screen {
+    max-width: 1000px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-size: 1.8rem;
+    line-height: 2rem;
+    padding: 0.5rem;
 }
+
+.initial__location {
+    margin-bottom: 4%;
+}
+
+.initial__cityinput {
+    width: 350px;
+    margin: 0;
+    border: 0;
+    font-size: 1.2rem;
+    line-height: 2rem;
+    text-align: center;
+    padding: 0.5rem;
+    border-left: solid 1px var(--second-line-color);
+    font-family: var(--prim-font-family);
+}
+
+.initial__button {
+    width: 350px;
+    background: var(--second-dark-bgcolor);
+    border-bottom: solid 1px var(--second-line-color);
+    color: var(--prim-font-color);
+    font-weight: bold;
+    text-align: center;
+    font-size: 1.2rem;
+    line-height: 2rem;
+    padding: 0.5rem;
+}
+
+.initial__button:hover {
+    background: var(--prim-ultradark-bgcolor);
+    color: var(--prim-line-color);
+}
+
 /*----------------------------loading screen--------------------------------*/
 .loading__screen{
     width: 100%;
