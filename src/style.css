@@ -110,6 +110,7 @@ a {
 
 .basic__description {
     font-size: 3rem;
+    line-height: 3rem;
     text-align: right;
 }
 
@@ -428,11 +429,13 @@ input[type="submit"]:hover {
 
     .main {
         flex-direction: column;
+        justify-content: space-between;
     }
 
     .today__wrapper,
     .main__aside {
         width: 100%;
+        min-height: auto;
     }
 
     .weather__wrapper {
@@ -443,11 +446,25 @@ input[type="submit"]:hover {
     }
     .main__details {
         width: 40%;
+        margin-top: 1rem;
     }
 
     .basic__icon img {
         height: auto;
-        width: auto;
+        width: 90px;
+    }
+
+    .basic__description {
+        font-size: 2rem;
+        line-height: 2rem;
+    }
+    
+    .basic__temperature {
+        top: 1.5rem;
+        font-size: 1.5rem;
+    }
+    #basic__temperature {
+        font-size: 2rem;
     }
     .details__item {
         display: flex;
@@ -458,6 +475,37 @@ input[type="submit"]:hover {
         width: auto;
     }
 
+    .details__icon {
+        height: 20px;
+        width: auto;
+    }
+
+    .five__wrapper {
+        flex-direction: row;
+        justify-content: space-between;
+        width: 60%;
+        font-size: 1rem;
+    }
+    .five__item {
+        padding: 0.5rem 1rem;
+    }
+    .five__icon {
+        width: 30%;
+        height: 2rem;
+        text-align: center;
+    }
+    .five__icon img {
+           width: auto;
+           height: 100%;
+    }
+    
+    .aside__settings {
+        display:none; /*to switch*/
+    }
+    .settings__icon img {
+        width: auto;
+        height: 70%;
+    }
 }
 
 
