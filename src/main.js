@@ -4,7 +4,7 @@ import moment from 'moment-timezone';
 const appId = '0ae6c1ab2f3771bcf82ab2f9738ba430';
 const apiKey = 'ZA9KO8TP5SVD';
 let units = 'metric'; // jeśli chcemy wyświetlać tez w Fahrenheitach
-let searchMethod = 'q'; // jeśli chcemy umozliwić wyszukiwanie po czymś innym niz nazwa miasta
+let searchMethod = 'q'; 
 
 const loadingScreen = document.getElementById('loading');
 
@@ -189,6 +189,10 @@ async function fetchByCity(query) {
     } catch(err) {
 
         console.log(err.message);
+        alert("Invalid input. Please try again.");
+        cityInput.reset();
+        localStorage.clear();
+        loading(false);
     }
 
 }
@@ -218,8 +222,12 @@ async function fetchByCoordinates(lat, lon) {
 
     } catch (err) {
         console.log(err.message);
+        alert("Couldn't find your location.");
+        loading(false);
+        
     }
 }
+
 
 // THE END OF FETCHING
 
@@ -248,6 +256,8 @@ function getCity(e) {
 
 //Wrzutka pogody do HTML
 function updateDOM(currentWeather, zoneName) {
+    cityInput.reset();
+    hideMatches();
     //<-----HEADER----->
     //CITY
      let city__name = document.getElementById("city__name");
@@ -392,10 +402,14 @@ function displayMatches() {
        suggestions.addEventListener('click', chooseCity);
 
     } else {
-        suggestions.innerHTML = '';
+        hideMatches();
 
         suggestions.removeEventListener('click', chooseCity);
     }
+}
+
+function hideMatches() {
+    suggestions.innerHTML = '';
 }
 
 function chooseCity(e){
