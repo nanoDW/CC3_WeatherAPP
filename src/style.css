@@ -54,6 +54,13 @@ a {
         
 }
 
+.main__header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
 .weather__wrapper {
     width: 100%;
     display: flex;
@@ -77,6 +84,11 @@ a {
     display: inline-block;
 }
 
+.city__icon img {
+    height: 1.5rem;
+    padding-top: 0.5rem;
+    margin-left: 0.5rem;
+}
 
 .settings__item a {
     display: inline-block;
@@ -435,6 +447,14 @@ input[type="submit"]:hover {
     .main {
         flex-direction: column;
         justify-content: space-between;
+    }
+
+    .main__header {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        font-size: 1rem;
+        margin-bottom: 1rem;
     }
 
     .today__wrapper,
