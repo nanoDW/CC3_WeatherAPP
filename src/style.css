@@ -420,6 +420,44 @@ input[type="submit"]:hover {
 
 @media (max-width: 900px) {
 
+    body {
+        background-image: linear-gradient(to bottom, var(--second-dark-bgcolor), var(--prim-dark-bgcolor));
+        font-size: 0.8rem;
+        line-height: 1.5rem;
+    }
+
+    .main {
+        flex-direction: column;
+    }
+
+    .today__wrapper,
+    .main__aside {
+        width: 100%;
+    }
+
+    .weather__wrapper {
+        flex-direction: row;
+    }
+    .main__basic {
+        width: 60%;
+    }
+    .main__details {
+        width: 40%;
+    }
+
+    .basic__icon img {
+        height: auto;
+        width: auto;
+    }
+    .details__item {
+        display: flex;
+        flex-direction: row;
+        margin: 0.5rem 0;
+        padding: 0 0.5rem;
+        text-align: right;
+        width: auto;
+    }
+
 }
 
 
