@@ -192,7 +192,7 @@ a {
 .aside__settings {
     background-color: var(--second-dark-bgcolor);
     display: flex;
-    flex-direction: row;
+    flex-direction: row-reverse;
     justify-content: space-between;
     align-items: center;
 }
@@ -262,12 +262,13 @@ input:focus {
     padding: 0.5rem;
     border: 0;
     border-left: solid 1px var(--second-line-color);
+    border-bottom: solid 1px var(--second-line-color);
     font-family: var(--prim-font-family);
     font-size: 1.2rem;
     line-height: 2rem;
 }
 
-.city__input {
+.city__form {
     color: var(--second-font-color);
 }
 
@@ -292,6 +293,8 @@ input:focus {
     border-left: solid 1px var(--second-line-color);
     border-bottom: solid 1px var(--second-line-color);
     padding: 0.5rem;
+    color: var(--prim-font-color);
+    font-size: 1.5rem;
 }
 
 .suggestions li:first-child {
@@ -349,6 +352,12 @@ h1 {
     font-size: 1.8rem;
     line-height: 2rem;
     padding: 0;
+}
+
+.initial__screen .suggestions {
+    border-right: solid 1px var(--second-line-color);
+    margin: 0 auto;
+    max-width: 400px;
 }
 
 .initial__location {
@@ -627,10 +636,27 @@ h1 {
     }
     
     .aside__settings {
-        display: flex; /*to switch*/
+        display: flex;
+        flex-direction: column;
     }
     .aside_five {
         display: none; /*to switch*/
+    }
+
+    .settings__icon,
+    .settings__list {
+        width: 100%;
+        text-align: left;
+    }
+    .settings__list {
+        display: inline-block; /*to switch*/
+    }
+
+    .settings__icon img {
+        width: 3.5rem;
+        height: auto;
+        padding: 0.5rem 1rem;
+        filter: none;
     }
 
     .settings__item {
@@ -640,18 +666,50 @@ h1 {
         border-bottom: 1px solid var(--second-line-color);
     }
 
-    .settings__icon img {
-        width: auto;
-        height: 70%;
+    .settings__item a {
+        width: 100%;
     }
 
     form {
         position: relative;
     }
 
-    .city__input {
-        display: none;
+    .city__form {
+        display: block;
     }
+
+    #cityInput {
+        position: relative;
+        top: 0;
+        right: 0;
+        width: 100%;
+        
+    }
+
+    #cityInput .city__input,
+    #cityInput .city__submit {
+        width: 100%;
+        max-width: 900px;
+        line-height: 2rem;
+        font-size: 1rem;
+        padding: 0.5rem 0.5rem 0.5rem 1rem;
+        border-left: 0;
+    }
+
+    .city__submit {
+        border-bottom: 0;
+        background-color: var(--prim-dark-bgcolor);
+    }
+
+    #cityInput .suggestions li {
+        background-color: var(--prim-dark-bgcolor);
+        text-align: left;
+        font-size: 1rem;
+    }
+    #cityInput .suggestions li:hover {
+        background-color: var(--second-dark-bgcolor);
+    }
+
 }
 
 
