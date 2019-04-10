@@ -186,6 +186,7 @@ async function fetchByCity(query) {
         let zoneName = await findTimeZone(currentWeather.coord.lon, currentWeather.coord.lat);
         let today = new Today(currentWeather, zoneName);
         console.log(today);
+        hideInital();
         updateDOM(currentWeather, zoneName);
 
         // read forecast
@@ -200,10 +201,18 @@ async function fetchByCity(query) {
 
         console.log(err.message);
         alert("Invalid input. Please try again.");
+        /*
+        if (localStorage.length === 0) {
+            document.getElementById("initial").style.display = "block";
+            initialCityinput.reset();
+
+        */
+        
         cityInput.reset();
         localStorage.clear();
+        
         loading(false);
-        document.getElementById("initial").style.display = "flex";
+
     }
 
 }
@@ -245,7 +254,6 @@ async function fetchByCoordinates(lat, lon) {
 //Wrzutka pogody do HTML
 function updateDOM(currentWeather, zoneName) {
     cityInput.reset();
-    hideMatches();
     //<-----HEADER----->
     //CITY
      let city__name = document.getElementById("city__name");
@@ -381,11 +389,12 @@ function getCity(e) {
     }
 
     if (city) {
-        hideInital();
         loading(true);
         localStorage.setItem('city', city);
         fetchByCity(city);
     }
+    //hideInital();
+    hideMatches();
 }
 
 //<----- Input box city suggestions ----->
