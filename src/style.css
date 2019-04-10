@@ -32,14 +32,16 @@ a {
     text-decoration: none;
 }
 
-.toggle__cityInput {
+
+/*--------------------toggling classes--------------------------------*/
+
+.toggle__cont {
     display: none;
 }
 
-.toggle__cityInput.is__visibleBlock {
+.toggle__cont.is__visibleBlock {
     display: block;
 }
-
 
 
 /*----------------------main----------------------------*/
@@ -213,6 +215,7 @@ a {
 }
 
 .settings__list {
+    background-color: var(--second-dark-bgcolor);
     z-index: 999;
 }
 
@@ -654,8 +657,9 @@ h1 {
         flex-direction: column;
         background-color: transparent;
     }
-    .aside__five {
-        display: flex;
+    .aside_five {
+        /*display: flex;*/
+        display: block;
     }
 
     .settings__icon,
@@ -663,7 +667,14 @@ h1 {
         width: 100%;
         text-align: left;
     }
+    
     .settings__list {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+    }
+
+    .settings__wrapper {
         display: none;
     }
 
@@ -690,8 +701,8 @@ h1 {
     }
 
     #cityInput {
-        position: relative;
-        top: 0;
+        position: absolute;
+        top: 49px;
         right: 0;
         width: 100%;
         

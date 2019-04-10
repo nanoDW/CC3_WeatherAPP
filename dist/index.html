@@ -94,12 +94,6 @@
                     </ul>
                 </div>
             </div>
-            <!-- form do wrzucenia w opowiednie miejsce w htmlu-->
-            <!----<form id="cityInput">
-                <input type="text" placeholder="City">
-                <ul class="suggestions"></ul>
-                <input type="submit" value="Submit">
-            </form>-->
         </div>
 
         <!-- Aside-->
@@ -107,22 +101,27 @@
 
             <!-- Settings -->
             <div class="aside__settings settings">
-                <i class="settings__icon"><img id="settings__icon" src="icons/settings.png"></i>
-                <ul class="settings__list">
-                    <li class="settings__item"><a href="#cityInput" class="toggleForm">Change location</a></li>
-                    <li class="settings__item">
-                        <!-- form do wrzucenia w opowiednie miejsce w htmlu-->
-                        <form id="cityInput" class="city__form toggle__cityInput">
-                            <input type="text" placeholder="City" class="city__input">
-                            <ul class="suggestions"></ul>
-                            <input type="submit" value="Submit" class="city__submit">
-                        </form>
-                    </li>
-                    <li class="settings__item"><a href="#">Favorites</a></li>
-                    <li class="settings__item"><a href="#">Info</a></li>
-                    <li class="settings__item"><a href="#">Settings</a></li>
-                </ul>
-                
+                <i class="settings__icon">
+                    <a href="#settingsWrapper" id="toggle__set" class="toggleUl">
+                        <img id="settings__icon" src="icons/settings.png">
+                    </a>
+                </i>
+                <div id="settingsWrapper" class="settings__wrapper">
+                    <ul id="settingsList" class="settings__list">
+                        <li class="settings__item"><a href="#cityInput" id="toggle__form" class="toggleForm">Change location</a></li>
+                        <li class="settings__item">
+                            <!-- form do wrzucenia w opowiednie miejsce w htmlu-->
+                            <form id="cityInput" class="city__form toggle__cont">
+                                <input type="text" placeholder="City" class="city__input">
+                                <ul class="suggestions"></ul>
+                                <input type="submit" value="Submit" class="city__submit">
+                            </form>
+                        </li>
+                        <li class="settings__item"><a href="#">Favorites</a></li>
+                        <li class="settings__item"><a href="#">Info</a></li>
+                        <li class="settings__item"><a href="#">Settings</a></li>
+                    </ul>
+                </div>
             </div>
 
             <!-- Five day weather -->

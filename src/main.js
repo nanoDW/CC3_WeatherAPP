@@ -1,6 +1,7 @@
 import './cssreset.css';
 import './style.css';
 import moment from 'moment-timezone';
+import { ENETUNREACH } from 'constants';
 const appId = '0ae6c1ab2f3771bcf82ab2f9738ba430';
 const apiKey = 'ZA9KO8TP5SVD';
 let units = 'metric'; // jeśli chcemy wyświetlać tez w Fahrenheitach
@@ -445,47 +446,54 @@ function hideInital() {
 };
 
 // toggle input form
-
 function toggleForm() {
-
-    let showSet = function (el) {
-        el.classList.add('is__visibleBlock');
-    };
-
-    // Hide an element
-    let hideSet = function (el) {
-        el.classList.remove('is__visibleBlock');
-    };
-
-    // Toggle element visibility
-    let toggleSet = function (el) {
+    let toggler = document.getElementById('toggle__form');
+    let toggleEl = function (el) {
         el.classList.toggle('is__visibleBlock');
     };
 
-    // Listen for click events
-    document.addEventListener('click', function (event) {
-
-        // Make sure clicked element is our toggle
-        if (!event.target.classList.contains('toggleForm')) return;
-
-        // Prevent default link behavior
+    toggler.addEventListener('click', function (event) {
         event.preventDefault();
 
-        // Get the content
         let content = document.querySelector(event.target.hash);
         if (!content) return;
-
-        // Toggle the content
-        toggleSet(content);
+        toggleEl(content);
 
     }, false);
-}
+};
 
+//toggle settings for smaller devices
+function toggleList() {
+    
+    let toggler = document.getElementById('toggle__set');
 
+    let toggleSet = function (el) {
+        if(el.style.display = 'none') {
+            el.style.display = 'block'
+        } else {
+            el.style.display = 'none';
+        };
+        //classList.toggle('toggle__cont', 'is__visibleBlock');
+    };
 
-
-
-
+    let checkWidth = () => window.innerWidth;
+    
+    toggler.addEventListener('click', function (event) {
+        
+        event.preventDefault();
+    
+        if(checkWidth() <= 900) {
+            let setList = document.getElementById('settingsWrapper');
+                        
+            console.log('costam ' + document.getElementById('settingsWrapper'));
+            toggleSet(setList);
+        } else {
+            return;
+        }
+    }, false);
+    //why does it not work after the second click??????????????????? ;((((  
+};
 
 
 toggleForm();
+toggleList();
