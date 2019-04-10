@@ -36,7 +36,7 @@ a {
     display: none;
 }
 
-.toggle__cityInput.isVisible {
+.toggle__cityInput.is__visibleBlock {
     display: block;
 }
 
@@ -210,6 +210,10 @@ a {
 .settings__icon,
 .settings__list {
     flex-grow: 1;
+}
+
+.settings__list {
+    z-index: 999;
 }
 
 .settings__icon img {
@@ -648,9 +652,10 @@ h1 {
     .aside__settings {
         display: flex;
         flex-direction: column;
+        background-color: transparent;
     }
-    .aside_five {
-        display: none; /*to switch*/
+    .aside__five {
+        display: flex;
     }
 
     .settings__icon,
@@ -659,7 +664,7 @@ h1 {
         text-align: left;
     }
     .settings__list {
-        display: inline-block; /*to switch*/
+        display: none;
     }
 
     .settings__icon img {
@@ -726,8 +731,19 @@ h1 {
         font-size: 2rem;
     }
 
+    .main__header {
+        padding: 0.5rem;
+        font-size: 0.8rem;
+        line-height: 1rem;
+        min-height: auto;
+    }
+
     .weather__wrapper {
         flex-direction: column;
+    }
+    .basic__description {
+        font-size: 1.2rem;
+        line-height: 1.5rem;
     }
     .main__basic,
     .main__details {
@@ -735,6 +751,7 @@ h1 {
     }
     .main__details {
         align-items: flex-end;
+        margin: 0;
     }
     .details__item {
         display: inline-block;
@@ -747,7 +764,7 @@ h1 {
         line-height: 1rem;
     }
     .five__item {
-        
+        padding: 0.2rem 1rem;
         flex-direction: row;
         justify-content: space-between;
     }
@@ -756,5 +773,6 @@ h1 {
         width: auto;
         flex-direction: column;
         justify-content: space-around;
+        font-size: 0.8rem;
     }
 }

@@ -446,34 +446,46 @@ function hideInital() {
 
 // toggle input form
 
-let showSet = function (el) {
-    el.classList.add('isVisible');
-};
+function toggleForm() {
 
-// Hide an element
-let hideSet = function (el) {
-    el.classList.remove('isVisible');
-};
+    let showSet = function (el) {
+        el.classList.add('is__visibleBlock');
+    };
 
-// Toggle element visibility
-let toggleSet = function (el) {
-    el.classList.toggle('isVisible');
-};
+    // Hide an element
+    let hideSet = function (el) {
+        el.classList.remove('is__visibleBlock');
+    };
 
-// Listen for click events
-document.addEventListener('click', function (event) {
+    // Toggle element visibility
+    let toggleSet = function (el) {
+        el.classList.toggle('is__visibleBlock');
+    };
 
-    // Make sure clicked element is our toggle
-    if (!event.target.classList.contains('toggleForm')) return;
+    // Listen for click events
+    document.addEventListener('click', function (event) {
 
-    // Prevent default link behavior
-    event.preventDefault();
+        // Make sure clicked element is our toggle
+        if (!event.target.classList.contains('toggleForm')) return;
 
-    // Get the content
-    let content = document.querySelector(event.target.hash);
-    if (!content) return;
+        // Prevent default link behavior
+        event.preventDefault();
 
-    // Toggle the content
-    toggleSet(content);
+        // Get the content
+        let content = document.querySelector(event.target.hash);
+        if (!content) return;
 
-}, false);
+        // Toggle the content
+        toggleSet(content);
+
+    }, false);
+}
+
+
+
+
+
+
+
+
+toggleForm();
