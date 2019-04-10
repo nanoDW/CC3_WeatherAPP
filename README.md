@@ -8,6 +8,7 @@
 * [Features](#features)
 * [Screenshots](#screenshots)
 * [Authors](#authors)
+* [Credits](#credits)
 
 ## General info
 The project was created during the third edition of the CodersCamp. It uses https://openweathermap.org/api for fetching the weather data.
@@ -52,3 +53,10 @@ To-do list:
 * https://github.com/Aaspyr
 * https://github.com/lamadrugada
 * https://github.com/MarcinCzajka
+
+## Credits
+
+Credit to authors of icons:
+* Icons made by https://www.freepik.com/ from https://www.flaticon.com/ are licensed by http://creativecommons.org/licenses/by/3.0/ 
+* Icons made by https://www.flaticon.com/authors/iconixar from https://www.flaticon.com/ are licensed by http://creativecommons.org/licenses/by/3.0/
+* Icons made by https://www.flaticon.com/authors/smashicons from https://www.flaticon.com/ are licensed by http://creativecommons.org/licenses/by/3.0/
