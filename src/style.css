@@ -3,8 +3,9 @@
 :root {
     --prim-dark-bgcolor: #247BA0;
     --prim-ultradark-bgcolor: #164A61;
-    --second-light-bgcolor: #FFE066;
-    --second-dark-bgcolor: #9E8C43;
+    --second-light-bgcolor: rgb(189, 252, 174);
+    --second-dark-bgcolor: rgb(119, 219, 99);
+    --settings-color: rgb(103, 190, 86);
     --prim-font-color: #fff;
     --second-font-color: #909090;
     --prim-font-family: 'Roboto', 'Arial', sans-serif;
@@ -202,7 +203,7 @@ a {
 /*----------------------settings-------------------------*/
 
 .aside__settings {
-    background-color: var(--second-dark-bgcolor);
+    background-color: var(--settings-color);
     display: flex;
     flex-direction: row-reverse;
     justify-content: space-between;
@@ -215,7 +216,7 @@ a {
 }
 
 .settings__list {
-    background-color: var(--second-dark-bgcolor);
+    background-color: var(--settings-color);
     z-index: 999;
 }
 
