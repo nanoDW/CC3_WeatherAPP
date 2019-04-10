@@ -43,7 +43,7 @@ To-do list:
 
 ## Screenshots
 
-![Initial screen](./img/initial_screen.png)
+![Initial screen](./img/Initial_screen.png)
 ![Main screen](./img/main_screen.png)
 
 
