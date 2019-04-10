@@ -32,6 +32,16 @@ a {
     text-decoration: none;
 }
 
+.toggle__cityInput {
+    display: none;
+}
+
+.toggle__cityInput.isVisible {
+    display: block;
+}
+
+
+
 /*----------------------main----------------------------*/
 
 .main {
@@ -672,10 +682,6 @@ h1 {
 
     form {
         position: relative;
-    }
-
-    .city__form {
-        display: block;
     }
 
     #cityInput {

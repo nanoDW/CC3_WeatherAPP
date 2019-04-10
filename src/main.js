@@ -444,4 +444,36 @@ function hideInital() {
     document.getElementById("initial").style.display = "none";
 };
 
- 
+// toggle input form
+
+let showSet = function (el) {
+    el.classList.add('isVisible');
+};
+
+// Hide an element
+let hideSet = function (el) {
+    el.classList.remove('isVisible');
+};
+
+// Toggle element visibility
+let toggleSet = function (el) {
+    el.classList.toggle('isVisible');
+};
+
+// Listen for click events
+document.addEventListener('click', function (event) {
+
+    // Make sure clicked element is our toggle
+    if (!event.target.classList.contains('toggleForm')) return;
+
+    // Prevent default link behavior
+    event.preventDefault();
+
+    // Get the content
+    let content = document.querySelector(event.target.hash);
+    if (!content) return;
+
+    // Toggle the content
+    toggleSet(content);
+
+}, false);
