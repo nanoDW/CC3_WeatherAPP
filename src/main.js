@@ -4,28 +4,32 @@ import moment from 'moment-timezone';
 import { ENETUNREACH } from 'constants';
 const appId = '0ae6c1ab2f3771bcf82ab2f9738ba430';
 const apiKey = 'ZA9KO8TP5SVD';
-let units = 'metric'; // jeśli chcemy wyświetlać tez w Fahrenheitach
+let units = 'metric'; 
 let searchMethod = 'q'; 
+
+// LOADING SCREEN
 
 const loadingScreen = document.getElementById('loading');
 
 loading(true);
 document.getElementById('hideHtmlFlash').remove();
 
-// Geolocation
+// GEOLOCATION
+
 navigator.geolocation.getCurrentPosition(geoSuccess, geoDenied);
 
-// Jak ktoś zaakceptuje
+// If geolocation accepted
 function geoSuccess(position) {
+    loading(true)
     let lat = position.coords.latitude;
     let lon = position.coords.longitude;
     fetchByCoordinates(lat, lon);
     hideInital();
 }
-// Jak ktoś odmówi - w takim przypadku chyba nic nie robimy i czekamy na input?
+// If geolocation denied
 function geoDenied() {
     console.log('Geolocation denied');
-    // local storage
+    // is something in the local storage?
     if (localStorage.city) {
         hideInital();
         loading(true);
@@ -33,6 +37,8 @@ function geoDenied() {
     }
     loading(false);
 }
+
+// CITY INPUT
 
 const cityInput = document.getElementById('cityInput');
 const initialInput = document.getElementById('initialCityinput');
@@ -84,7 +90,6 @@ function convertTimeZone(forecast, zoneName) {
     findDates(forecast, zoneName);
 }
 
-
 function findDates(forecast, zoneName) {
     // filtering out the wather for today
     // filteredForecast is a new array with weather for tomorrow and the next days
@@ -135,7 +140,6 @@ function minMaxTemp(days) {
     return [maxTemps, minTemps];
 }
 
-
 class Day {
     constructor(day, maxTemp, minTemp) {
         this.date = day[4].dt_txt_adjusted;
@@ -147,8 +151,6 @@ class Day {
         this.minTemp = minTemp;
     }
 }
-
-// FINDING THE RIGHT DATA FOR THE CURRENT WEATHER
 
 class Today {
     constructor(currentWeather, zoneName) {
@@ -170,12 +172,11 @@ class Today {
     }
 }
 
-// THE END OF FINDING DATA :)
 
 // FETCHING
+
 async function fetchByCity(query) {
-    //toggleInitial();
-    //toggleLoading();
+   
     try {
         // read current weather
         let weatherResponse = await fetch(`https://api.openweathermap.org/data/2.5/weather?${searchMethod}=${query}&units=${units}&APPID=${appId}`);
@@ -201,13 +202,6 @@ async function fetchByCity(query) {
 
         console.log(err.message);
         alert("Invalid input. Please try again.");
-        /*
-        if (localStorage.length === 0) {
-            document.getElementById("initial").style.display = "block";
-            initialCityinput.reset();
-
-        */
-        
         cityInput.reset();
         localStorage.clear();
         
@@ -218,8 +212,7 @@ async function fetchByCity(query) {
 }
 
 async function fetchByCoordinates(lat, lon) {
-    //toggleInitial();
-    //toggleLoading();
+    
     try {
         // read current weather
         let weatherResponse = await fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=${units}&APPID=${appId}`)
@@ -249,9 +242,9 @@ async function fetchByCoordinates(lat, lon) {
 }
 
 
-// THE END OF FETCHING
 
-//Wrzutka pogody do HTML
+// DISPLAY WEATHER IN THE HTML
+
 function updateDOM(currentWeather, zoneName) {
     cityInput.reset();
     //<-----HEADER----->
@@ -266,34 +259,34 @@ function updateDOM(currentWeather, zoneName) {
      header__date.innerText = ' ' + headerDate;
 
     //<-----Weather Today Basic Info----->
-    //OPIS
+    //DESCRIPTION
     let basic__description = document.getElementById("basic__description");
     let basicDescription = currentWeather.weather[0].description;
     basic__description.innerText = ' ' + basicDescription;
 
-    //TEMPERATURA
+    //TEMPERATURE
     let basic__temperature = document.getElementById("basic__temperature");
     let basicTemperature = Math.floor(currentWeather.main.temp);
     basic__temperature.innerText = ' ' + basicTemperature;
 
-    //IKONA
+    //ICON
     let basic__icon = document.getElementById("basic__icon");
     if (currentWeather.weather[0].icon !== 0){
         basic__icon.src = 'icons/' + currentWeather.weather[0].icon + '.png';
     }   
 
     //<-----Weather Today Details----->
-    //WIATR
+    //WIND
     let wind__description = document.getElementById("wind__description");
     let windDescription = currentWeather.wind.speed;
     wind__description.innerText = ' ' + windDescription + ' m/s';
 
-    //CIŚNIENIE
+    //PRESSURE
     let pressure__description = document.getElementById("pressure__description");
     let pressureDescription = currentWeather.main.pressure;
     pressure__description.innerText = ' ' + pressureDescription + ' hPa';
 
-    //WILGOTNOŚĆ
+    //HUMIDITY
     let humidity__description = document.getElementById("humidity__description");
     let humidityDescription = currentWeather.main.humidity;
     humidity__description.innerText = ' ' + humidityDescription + ' %';
@@ -303,7 +296,7 @@ function updateDOM(currentWeather, zoneName) {
     let sunriseDescription = moment(currentWeather.sys.sunrise * 1000).tz(zoneName).format('h:mm');
     sunrise__description.innerText = ' ' + sunriseDescription + ' am';
 
-    //SUNRISE
+    //SUNSET
     let sunset__description = document.getElementById("sunset__description");
     let sunsetDescription = moment(currentWeather.sys.sunset * 1000).tz(zoneName).format('h:mm');
     sunset__description.innerText = ' ' + sunsetDescription + ' pm';
@@ -367,11 +360,12 @@ function updateForecast(days) {
     if (days[3].icon !== 0) {
         fourth__icon.src = 'icons/' + days[3].icon + '.png';
     }
-   
 
     loading(false);
 
 }
+
+// READING DATA FROM THE INPUT BOX
 
 function getCity(e) {
     e.preventDefault();
@@ -393,7 +387,6 @@ function getCity(e) {
         localStorage.setItem('city', city);
         fetchByCity(city);
     }
-    //hideInital();
     hideMatches();
 }
 
@@ -437,22 +430,7 @@ function chooseCity(e, inputBox){
     initialInput.firstElementChild.value = e.target.innerText;
     hideMatches();
 }
-//<----- Loading screen ----->
 
-    /*window.addEventListener("load", function(){
-        let loading = document.getElementById("loading");
-        document.body.removeChild(loading);
-    })*/
-
-function loading(setLoading) {
-    (setLoading ? loadingScreen.style.display = 'block' : loadingScreen.style.display = 'none');
-}
-
-
-// hide initial screen
-function hideInital() {
-    document.getElementById("initial").style.display = "none";
-};
 
 // toggle input form
 function toggleForm() {
@@ -502,6 +480,15 @@ function toggleList() {
             return;
         }
     }, false);
+};
+
+function loading(setLoading) {
+    (setLoading ? loadingScreen.style.display = 'block' : loadingScreen.style.display = 'none');
+}
+
+// hide initial screen
+function hideInital() {
+    document.getElementById("initial").style.display = "none";
 };
 
 
