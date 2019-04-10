@@ -464,34 +464,35 @@ function toggleForm() {
 
 //toggle settings for smaller devices
 function toggleList() {
-    
     let toggler = document.getElementById('toggle__set');
-
+    
+    let checkWidth = function () {
+        return window.innerWidth;
+    }
+    let show = function (el) {
+        el.style.display = 'block';
+    };
+    let hide = function (el) {
+        el.style.display = 'none';
+    };
     let toggleSet = function (el) {
-        if(el.style.display = 'none') {
-            el.style.display = 'block'
-        } else {
-            el.style.display = 'none';
-        };
-        //classList.toggle('toggle__cont', 'is__visibleBlock');
+        if (window.getComputedStyle(el).display === 'block') {
+            hide(el);
+            return;
+        }
+        show(el);
     };
 
-    let checkWidth = () => window.innerWidth;
-    
     toggler.addEventListener('click', function (event) {
-        
-        event.preventDefault();
+         event.preventDefault();
     
         if(checkWidth() <= 900) {
             let setList = document.getElementById('settingsWrapper');
-                        
-            console.log('costam ' + document.getElementById('settingsWrapper'));
             toggleSet(setList);
         } else {
             return;
         }
     }, false);
-    //why does it not work after the second click??????????????????? ;((((  
 };
 
 
