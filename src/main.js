@@ -304,7 +304,6 @@ function updateDOM(currentWeather, zoneName) {
 
 // <----- Forecast----->
 function updateForecast(days) {
-    console.log(days);
     //DATA 1
     let first__data = document.getElementById("first__data");
     let firstData = moment(days[0].date).format('dddd, Do MMMM YYYY');
